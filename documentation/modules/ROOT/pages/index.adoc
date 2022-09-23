@@ -1,20 +1,32 @@
-= Welcome to Template Tutorial
+= Welcome to the Openshift Hackathon
 :page-layout: home
 :!sectids:
 
 [.text-center.strong]
-== Publish Services to Kubernetes
+== Bienvenue au Hackathon Erable ! 
 
-A Kubernetes tutorial to show how you can deploy a Java service to a Kubernetes cluster as it was a child game.
+Vous trouverez ici le contenu des différents challenges ainsi que des resources techniques.
 
-[.tiles.browse]
-== Browse modules
+Assurez-vous aussi de bien rejoindre le channel Slack car c'est par ce moyen que vous allez fournrir les preuves pour chaque challenge : https://rhdevnation.slack.com/archives/C03FGU9LR2N
 
-[.tile]
-.xref:01-setup.adoc[Get Started]
-* xref:01-setup.adoc#minikube[Minikube]
+== Fournir les preuves 
 
-[.tile]
-.xref:02-deploy.adoc[Deploying]
-* xref:02-deploy.adoc#package[Package the Application]
-* xref:02-deploy.adoc#deploy[Deploy the Application]
+Dès que vous avez completé un challenge, un membre de votre équipe, enverra un message sur le channel avec en préfixe, le nom de l'équipe et le numéro du challenge, par exemple *[Equipe1 - Challenge 1.1.1]* suivis du screnshot ou bien de l'URL.
+
+== Le comptage des points
+
+Chaque challenge contient 2 sous-challenge ceux-ci contiennent un certains nombre de preuves à fournir. 
+Chaque sous-challenge rapporte 5 points lorsque toutes les preuves ont été fournis.
+
+Par exemple pour avoir les 5 points du Challenge 1.1 , il faudra fournir les preuves 1.1.1, 1.1.2 et 1.1.3
+
+Des points bonus sont attribués pour les premières équipes fournissant les preuves :
+
+* Première équipe : +3 points
+* Deuxième équipe : +2 points
+* Troisième équipe : +1 points
+
+== Les resources
+
+* http://dn.dev/learn
+* http://quarkus.io

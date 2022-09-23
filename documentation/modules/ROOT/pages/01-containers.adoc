@@ -1,0 +1,43 @@
+== Les containers
+
+Le premier challenge ca consister à containeriser une application.
+L'application à containeriser se trouve ici : https://github.com/sebastienblanc/antennas-front
+
+Pensez bien à bien forker ce dépot ! Vous allez travailler sur cette application pendant les 2 prochaines journées.
+Pensez bien à packager votre application avant de commencer à la containeriser. (`mvn clean package`)
+
+
+[#exercice1]
+== Containeriser votre app [*Challenge 1.1*] __Beginner__
+
+Pour ce premier challenge vous allez utiliser Docker et un DockerFile pour créer votre image de container.
+Vous pouvez créer votre Dockerfile mais regardez le repo forké, il y a peut-etre un Dockerfile déjà présent ;)
+
+Vous allez ensuite devoir démarrer ce container et faire en sorte que le port 8080 soit bien exposé.
+
+Et finalement démarrer encore une fois le container mais positionner une variable d'environnement `PING` avec la valeur `ERABLE`.
+
+
+=== Preuves à fournir 
+
+* [*Challenge 1.1.1*] Screenshot du résultat du `docker build`
+* [*Challenge 1.1.2*] Screenshot du résultat du `docker run` et le résultat du `curl localhost:8080/rest/ping`
+* [*Challenge 1.1.3*] Screenshot du résultat du `curl localhost:8080/rest/ping` affichant `ERABLE`
+
+
+[#exercice2]
+== Containeriser votre app avec JKube et pousser vers une registry [*Challenge 1.2*] __Advanced__
+
+Cette fois au lieu d'utiliser Docker vous allez utiliser JKube. 
+Sun nous a écris un petit document qui vous aidera, gardez car vous en aurez besoin aussi cet après-midi pour le deuxième challenge, cherchez dans les annexes ...
+
+Pour la deuxième partie de ce challenge vous allez devoir pousser votre image de container dans une registry. Pour cela vous pouvez vous créer un compte sur https://quay.io/
+
+=== Preuves à fournir 
+
+* [*Challenge 1.2.1*] Screenshot du résultat de la commande du plugin maven `oc:build`
+* [*Challenge 1.2.2*] Screenshot de votre repo quay.io où l'on voit l'image de container.
+
+
+
+

@@ -1,0 +1,28 @@
+== GitOps
+
+
+
+===  [*Challenge 7.1*]  __Beginner__
+
+
+==== Preuves à fournir 
+
+* 
+
+=== [*Challenge 7.2*] __Advanced__
+
+
+
+==== Preuves à fournir
+
+* 
+
+
+
+Bravo ! 
+
+
+
+
+
+

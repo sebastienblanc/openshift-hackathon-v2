@@ -1,0 +1,51 @@
+== Résilience et scalabilité
+
+
+=== [*Challenge 6.1*]  __Beginner__
+
+Ensuite, il faut mettre en place un HPA (Horizontal Pod Autoscaler). Pensez aussi à baisser les resources disponibles de votre `Deployment` (Limit and Request), mettez des valeurs assez basse pour faire réagir le HPA. 
+
+Voici un example d'un HPA : 
+
+[.console-output]
+[source,text]
+----
+
+kind: HorizontalPodAutoscaler
+apiVersion: autoscaling/v2beta2
+metadata:
+  name: example
+  namespace: myspace
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: antennas-incident
+    apiVersion: apps/v1
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: AverageValue
+          averageValue: 10Mi
+
+----
+
+==== Preuves à fournir 
+
+* 
+
+
+=== [*Challenge 6.2*] __Advanced__
+
+
+
+==== Preuves à fournir 
+
+* 
+
+
+
+

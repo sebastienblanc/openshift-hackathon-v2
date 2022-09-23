@@ -1,0 +1,20 @@
+== Helm Et Service
+
+
+
+===   __Beginner__
+
+
+==== Preuves à fournir 
+
+* [*Challenge 3.1.1*] Screenshot de l'Operator installé
+* [*Challenge 3.1.2*] Screenshot du pipeline qui s'est déroulé sans soucis (tout vert)
+
+===  __Advanced__
+
+On veut déclencher notre pipeline à chaque commit, pour cela il va falloir installer un Trigger.
+
+==== Preuves à fournir 
+
+* 
+
