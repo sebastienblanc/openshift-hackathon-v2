@@ -3,7 +3,7 @@
 :!sectids:
 
 [.text-center.strong]
-== Bienvenue au Hackathon Erable ! 
+== Bienvenue au Hackathon ! 
 
 Vous trouverez ici le contenu des différents challenges ainsi que des resources techniques.
 
