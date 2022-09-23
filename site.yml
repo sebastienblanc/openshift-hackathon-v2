@@ -4,7 +4,7 @@ runtime:
 site:
   title: Openshift Hackathon
   url: https://redhat-scholars.github.io/openshift-hackathon-v2
-  start_page: openshift-hackathon-v2::index.adoc
+  start_page: openshift-hackathon::index.adoc
 
 content:
   sources:
