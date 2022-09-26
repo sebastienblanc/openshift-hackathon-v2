@@ -1,31 +1,39 @@
-== Déployer votre image de container sur Openshift
+== Déployer votre image de container sur Openshift avec Gitlab CI/CD
 
-Ce matin vous avez créé votre image de container, il est maintenant temps de la déployer sur votre cluster ! 
+Ce matin vous avez créé votre image de container, il est maintenant temps de la déployer sur votre cluster! 
+Vous allez devoir mettre en place une chaine de CI/CD. Vous allez utiliser Gitlab pour faire ceci.
+
+Pour en savoir plus sur Gitlab sur Openshift n'hésitez pas à regarder ce tutorial : https://docs.gitlab.com/runner/install/operator.html et
+https://docs.gitlab.com/runner/configuration/configuring_runner_operator.html
 
 === Accès au cluster 
 
 
-=== Déployer directement l'image sur OpenShift [*Challenge 2.1*]  __Beginner__
+=== Installer Un Gitlab Runner sur OpenShift [*Challenge 2.1*]  __Beginner__
 
-Utilisez la perspective "Developer" de votre console OpenShift pour déployer votre image.
-
-==== Preuves à fournir 
-
-* [*Challenge 2.1.1*] L'URL de la route de votre application
-* [*Challenge 2.1.2*] Screenshot montrant que vous avez réussis à scaler l'application à 2 Pods
-
-=== Utilisation de s2i et génération des resources K8s avec JKube [*Challenge 2.2*] __Advanced__
-
-Dans cette deuxième partie du challenge vous allez déployer votre application de 2 manières différentes : 
-
-* En utilisant s2i et en pointant directement vers le repo Git de l'application.
-* En générant les resources avec JKube, n'hésitez pas à revoir le doc de Sun qui donne des conseils.
-
-N'hésitez pas à créer des projets/namespace OpenShift pour chaque type de déploiement pour éviter tous conflits dans le nom des resources.
+Avant de pouvoir utiliser Gitlab avec Openshift il faut qu'on installe un "Gitlab runner" sur Openshift.  Le runner est fourni par l'intermédiaire d'un Operator. Il va falloir que vous exploriez votre cluster pour trouver comment l'installer. 
+N'oublier pas de créer un secret pour le runner avant de le deployer.  Pour faire cela vous devrez recuperer le token dans la partie Settings > CI/CD > Runners de votre projet Gitlab.  Petite astuce pour créer le secret: `oc create secret generic runner-token-secret --from-literal runner_registration_token=__YOUR_TOKEN__ -n gitlab`
 
 ==== Preuves à fournir 
 
-* [*Challenge 2.2.1*] Screenshot du build dans OpenShift
-* [*Challenge 2.2.2*] L'URL de la route de votre application
+* [*Challenge 2.1.1*] Screenshot de l'Operator installé
+* [*Challenge 2.1.2*] Screenshot de Gitlab CI/CD qui montre que Gitlab s'est connectee avec le Runner qui tourne sur Openshift
+
+=== Creer un pipeline qui deploie l'application sur Openshift [*Challenge 2.2*]  __Beginner__
+
+Une fois installé le gitlab runner vous allez devoir créer un pipeline (gitlab-ci.yml) pour creer un image Docker de l'application, le pusher vers un Container Registry et declancher le deploiment dans Openshift.  [TODO - example repo]
+
+==== Preuves à fournir 
+
+* [*Challenge 2.2.1*] L'URL de votre repo Gitlab qui contient le pipeline (qui a bien evidemment reussi)
+* [*Challenge 2.2.1*] L'URL de la route de votre application
 * [*Challenge 2.2.3*] Screenshot des resources k8s générées 
-* [*Challenge 2.2.4*] L'URL de la route de votre application
+
+=== Installer Gitlab Pipeline Trigger [*Challenge 2.3*] __Advanced__
+
+On veut déclencher notre pipeline à chaque commit, pour cela il va falloir installer un Trigger.
+
+==== Preuves à fournir 
+
+* [*Challenge 3.2.1*] Screenshot du trigger qui déclenche le pipeline (ou screenshot du log)
+
