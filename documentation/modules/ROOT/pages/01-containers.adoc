@@ -1,6 +1,6 @@
 == Les containers
 
-Le premier challenge va consister à containeriser une application.
+Le premier challenge ca consister à containeriser une application.
 L'application à containeriser se trouve ici : https://github.com/sebastienblanc/antennas-front
 
 Pensez bien à bien forker ce dépot ! Vous allez travailler sur cette application pendant les 2 prochaines journées.
@@ -11,11 +11,11 @@ Pensez bien à packager votre application avant de commencer à la containeriser
 == Containeriser votre app [*Challenge 1.1*] __Beginner__
 
 Pour ce premier challenge vous allez utiliser Docker et un DockerFile pour créer votre image de container.
-Vous pouvez créer votre Dockerfile mais regardez le repo forké, il y a peut-etre un Dockerfile déjà présent ;)
+Vous pouvez créer votre Dockerfile mais regardez le repo forké, il y a peut-être un Dockerfile déjà présent ;)
 
 Vous allez ensuite devoir démarrer ce container et faire en sorte que le port 8080 soit bien exposé.
 
-Et finalement démarrer encore une fois le container mais positionner une variable d'environnement `PING` avec la valeur `ERABLE`.
+Et finalement démarrer encore une fois le container mais positionner une variable d'environnement `PING` avec la valeur `DIOD`.
 
 
 === Preuves à fournir 
