@@ -22,7 +22,7 @@ Accédez à Gitlab et créez un account + projet.
 ==== Installer Un Gitlab Runner sur OpenShift
 
 Avant de pouvoir utiliser Gitlab avec Openshift il faut que vous installiez un "Gitlab runner" sur Openshift.  Le runner est fourni par l'intermédiaire d'un Operator. Il va falloir que vous exploriez votre cluster pour trouver comment l'installer.
-N'oublier pas de créer un secret pour le runner avant de le deployer.  Pour faire cela vous devrez récupérer le token dans la partie Settings > CI/CD > Runners de votre projet Gitlab.  Petite astuce pour créer le secret: `oc create secret generic runner-token-secret --from-literal runner_registration_token=__YOUR_TOKEN__ -n gitlab`
+N'oublier pas de créer un secret pour le runner avant de le deployer.  Pour faire cela vous devrez récupérer le token dans la partie Settings > CI/CD > Runners de votre projet Gitlab.  
 
 Une fois installé le Gitlab runner vous allez devoir créer un pipeline (gitlab-ci.yml) pour créer un image Docker de l'application, le pusher vers un Container Registry et déclencher le déploiement dans Openshift.  [TODO - example repo]
 
