@@ -1,7 +1,7 @@
 == Les containers
 
 Le premier challenge ca consister à containeriser une application.
-L'application à containeriser se trouve ici : https://github.com/sebastienblanc/antennas-front
+L'application à containeriser se trouve ici : https://gitlab.com/redhat-scholars/antennas-front.git
 
 Pensez bien à bien forker ce dépot ! Vous allez travailler sur cette application pendant les 2 prochaines journées.
 Pensez bien à packager votre application avant de commencer à la containeriser. (`mvn clean package`)
@@ -22,7 +22,7 @@ Et finalement démarrer encore une fois le container mais positionner une variab
 
 * [*Challenge 1.1.1*] Screenshot du résultat du `docker build`
 * [*Challenge 1.1.2*] Screenshot du résultat du `docker run` et le résultat du `curl localhost:8080/rest/ping`
-* [*Challenge 1.1.3*] Screenshot du résultat du `curl localhost:8080/rest/ping` affichant `ERABLE`
+* [*Challenge 1.1.3*] Screenshot du résultat du `curl localhost:8080/rest/ping` affichant `DIOD`
 
 
 [#exercice2]
