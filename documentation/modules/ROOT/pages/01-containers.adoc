@@ -1,7 +1,7 @@
 == Les containers
 
 Le premier challenge ca consister à containeriser une application.
-L'application à containeriser se trouve ici : https://gitlab.com/redhat-scholars/antennas-front.git
+L'application à containeriser se trouve ici : https://gitlab.com/redhat-scholars/antennas-front
 
 Pensez bien à bien forker ce dépot ! Vous allez travailler sur cette application pendant les 2 prochaines journées.
 Pensez bien à packager votre application avant de commencer à la containeriser. (`mvn clean package`)
