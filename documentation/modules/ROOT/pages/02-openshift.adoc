@@ -7,6 +7,7 @@ Ce matin vous avez créé votre image de container, il est maintenant temps de l
 === Déployer directement l'image sur OpenShift [*Challenge 2.1*]  __Beginner__
 
 Utilisez la perspective "Developer" de votre console OpenShift pour déployer votre image.
+Vous pouvez utiliser le projet "default" pour cette étape.
 
 ==== Preuves à fournir 
 
@@ -19,8 +20,10 @@ Utilisez la perspective "Developer" de votre console OpenShift pour déployer vo
 
 ==== Installer Un Gitlab Runner sur OpenShift
 
+Pour ce challenge, créer le projet "diod" sur votre cluster OpenShift.
+
 Avant de pouvoir utiliser Gitlab avec Openshift il faut que vous installiez un "Gitlab runner" sur Openshift.  Le runner est fourni par l'intermédiaire d'un Operator. Il va falloir que vous exploriez votre cluster pour trouver comment l'installer.
-N'oublier pas de créer un secret pour le runner avant de le deployer.  Pour faire cela vous devrez récupérer le token dans la partie Settings > CI/CD > Runners de votre projet Gitlab.  
+N'oublier pas de créer un secret pour le runner avant de le déployer.  Pour faire cela vous devrez récupérer le token dans la partie Settings > CI/CD > Runners de votre projet Gitlab.
 
 Une fois installé le Gitlab runner vous allez devoir créer un pipeline (gitlab-ci.yml) pour builder l'application et le pousser vers Openshift (qui va s'occuper de containeriser l'application et faire un déploiement 'rolling'). 
 Il y a un gitlab-ci.yml déjà present dans le repo pour vous mettre en route, mais n’hésitez pas de le modifier.  Le meilleur gitlab-ci.yml gagnera peut-être quelques points bonus :)  

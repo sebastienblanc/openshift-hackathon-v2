@@ -1,18 +1,20 @@
 == Helm Et Service
 
+Pour ce challenge, nous allons utiliser Helm pour déployer des ressources sur notre cluster.
 
-
-===   __Beginner__
-
+===   Déployer une base MariaDB avec un chart Helm [*Challenge 3.1*] __Beginner__
+Nous allons donc déployer une base MariaDB avec un chart Helm.
 
 ==== Preuves à fournir 
 
-* [*Challenge 3.1.1*] Screenshot de l'Operator installé
-* [*Challenge 3.1.2*] Screenshot du pipeline qui s'est déroulé sans soucis (tout vert)
+* [*Challenge 3.1.1*] Output de la commande Helm
+* [*Challenge 3.1.2*] Screenshot de la base déployée
 
-===  __Advanced__
 
-On veut déclencher notre pipeline à chaque commit, pour cela il va falloir installer un Trigger.
+===  [*Challenge 3.2*] __Advanced__
+
+* [*Challenge 3.2.1*] 
+* [*Challenge 3.2.2*] 
 
 ==== Preuves à fournir 
 
