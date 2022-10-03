@@ -1,19 +1,27 @@
 == Consommation d'un service
 
+Maintenant que nous avons déployé `antennas-incident` nous alons devoir modifier notre première application, `antennas-front`,  afin qu'elle puisse récupérer la liste des incidents du service distant.
 
-===   [*Challenge 4.1*]  __Beginner__
+Il va falloir un petit peu coder :) 
 
+Voici un guide sur comment utiliser le `rest-client` de Quarkus : https://quarkus.io/guides/rest-client
 
+=== Consommer le service distant avec APIKEY "en dur"  [*Challenge 4.1*]  __Beginner__
+
+Le `antennas-incident` expose un point REST `/rest/incidents?api_key=mysecret` , pensez bien à utiliser la valeur correcte.
+Vous pouvez accéder au sein du cluster au service avec `http://antennas-incident/` , pour ceci pensez bien à rajouter une variable d’environnement avec cette clef :
+`ORG_SEBI_INCIDENT_INCIDENTSERVICE_MP_REST_URL` (Si bien sure vous avez fait un client rest `org.sebi.IncidentService`)
 
 ==== Preuves à fournir 
 
-* 
+* [*Challenge 4.1.1*] URL de l'application front qui montre qu'elle consomme le service distant.
 
-=== [*Challenge 4.2*] __Advanced__
+=== Consommer le service distant en utilisant l'APIKEY fournit par le Secret [*Challenge 4.2*] __Advanced__
 
+Au lieu de faire votre appel au service distant en passant l'APIKEY modifié l'application et les resources k8s afin de "coupler" le secret à votre application. 
 
 ==== Preuves à fournir 
 
-* 
-
+* [*Challenge 4.2.1*] Screenshot ou gist qui montre le `Deployment` est "couplé" au secret.
+* [*Challenge 4.2.2*] URL de l'application front qui montre qu'elle consomme le service distant.
 
