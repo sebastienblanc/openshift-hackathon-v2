@@ -4,6 +4,8 @@ Pour ce challenge, nous allons utiliser Helm pour déployer des ressources sur n
 
 ===   Déployer une base MariaDB avec un chart Helm [*Challenge 3.1*] __Beginner__
 Nous allons donc déployer une base MariaDB avec un chart Helm.
+Vous pouvez utiliser le chart Helm mariadb disponible dans le repo : https://gitlab.com/redhat-scholars/helm-charts ou ajouter ajouter le repo helm avec la commande `helm repo add redhat-scholars-charts https://gitlab.com/api/v4/projects/39850850/packages/helm/stable`
+N'oubliez pas d'ajouter les valeurs pour créer l'utilisateur et la base ;-)
 
 ==== Preuves à fournir 
 
