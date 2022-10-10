@@ -1,10 +1,14 @@
 == Les containers
 
-⚠️
-Avant toute chose, assurez-vous d'avoir installé quelques outils de développement :
-  - OpenJDK : environnement Java de dévelopement
-  - Maven : outil de construction des applications Java
-  - Docker ou Podman : outil qui va nous permettre de construire et exécuter des conteneurs
+
+--- 
+
+> Avant toute chose, assurez-vous d'avoir installé quelques outils de développement :
+>  - OpenJDK : environnement Java de dévelopement
+>  - Maven : outil de construction des applications Java
+>  - Docker ou Podman : outil qui va nous permettre de construire et exécuter des conteneurs
+
+--- 
 
 
 Le premier challenge va consister à containeriser une application.  
