@@ -1,10 +1,9 @@
 * xref:01-containers.adoc[1. Challenge 1 - Containers]
 * xref:02-openshift.adoc[2. Challenge 2 - OpenShift & CI/CD]
 * xref:03-helm_services.adoc[3. Challenge 3 - Helm et Services]
-* xref:04-consommation-services.adoc[4. Challenge 4 - Consommation du service]
-* xref:05-observability.adoc[5. Challenge 5 - Observabilité]
-* xref:06-resilience.adoc[6. Challenge 6 - Résilience et scalabilité]
-* xref:07-gitops.adoc[7. Challenge 7 - GitOps]
+* xref:04-observability.adoc[4. Challenge 4 - Observabilité]
+* xref:05-resilience.adoc[5. Challenge 5 - Résilience et scalabilité]
+* xref:06-gitops.adoc[6. Challenge 6 - GitOps]
 
 
 

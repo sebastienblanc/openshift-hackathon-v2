@@ -7,12 +7,14 @@ Ce matin vous avez créé votre image de container, il est maintenant temps de l
 === Déployer directement l'image sur OpenShift [*Challenge 2.1*]  __Beginner__
 
 Utilisez la perspective "Developer" de votre console OpenShift pour déployer votre image.
-Vous pouvez utiliser le projet **"default"** pour cette étape.
+Vous pouvez utiliser le projet **"default"** pour cette étape.  
+Profitez en pour vous familiariser avec les objets OpenShift (POD, Deploymement, Service, Route ...).
 
 ==== Preuves à fournir 
 
 * [*Challenge 2.1.1*] L'URL de la route de votre application
 * [*Challenge 2.1.2*] Screenshot montrant que vous avez réussi à scaler l'application à 2 Pods
+* [*Challenge 2.1.3*] Ajouter la vairiable d'environnement `PING` avec la valeur DIOD et vérifier que vous avez le même comportement que localement.
 
 
 === Déployer l'application sur Openshift avec Gitlab CI/CD [*Challenge 2.2*]  __Advanced__
