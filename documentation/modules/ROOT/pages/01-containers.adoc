@@ -1,16 +1,23 @@
 == Les containers
 
-Le premier challenge ca consister à containeriser une application.
+*** 
+Avant toute chose, assurez-vous d'avoir installé quelques outils de développement :
+  - OpenJDK : environnement Java de dévelopement
+  - Maven : outil de construction des applications Java
+  - Docker ou Podman : outil qui va nous permettre de construire et exécuter des conteneurs 
+***
+  
+Le premier challenge va consister à containeriser une application.  
 L'application à containeriser se trouve ici : https://gitlab.com/redhat-scholars/antennas-front
 
-Pensez bien à bien forker ce dépot ! Vous allez travailler sur cette application pendant les 2 prochaines journées.
-Pensez bien à packager votre application avant de commencer à la containeriser. (`mvn clean package`)
+Pensez bien à bien forker ce dépôt ! Vous allez travailler sur cette application pendant les 2 prochaines journées.  
+N'oubliez pas de packager votre application avant de commencer à la conteneuriser. Vous pouvez utiliser la commande Maven `mvn clean package`.
 
 
 [#exercice1]
 == Containeriser votre app [*Challenge 1.1*] __Beginner__
 
-Pour ce premier challenge, vous allez utiliser Docker et un DockerFile pour créer votre image de container.
+Pour ce premier challenge, vous allez utiliser Docker et un Dockerfile pour créer votre image de container.
 Vous pouvez créer votre Dockerfile mais regardez le repo forké, il y a peut-être un Dockerfile déjà présent ;)
 
 Vous allez ensuite devoir démarrer ce container et faire en sorte que le port 8080 soit bien exposé.
