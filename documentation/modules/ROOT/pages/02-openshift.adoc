@@ -37,6 +37,7 @@ stringData:
     runner-registration-token: LE_TOKEN_GITLAB
 ```
 
+Le runner devra être déployé dans le namespace **"diod"**.  
 
 Une fois installé le Gitlab runner vous allez devoir créer un pipeline (gitlab-ci.yml) pour builder l'application et le pousser vers Openshift (qui va s'occuper de containeriser l'application et faire un déploiement 'rolling').  
 Il y a un gitlab-ci.yml déjà present dans le repo pour vous mettre en route, mais n’hésitez pas de le modifier.  Le meilleur gitlab-ci.yml gagnera peut-être quelques points bonus :)  
@@ -50,5 +51,5 @@ clusterrole.rbac.authorization.k8s.io/edit added: "system:serviceaccount:diod:de
 * [*Challenge 2.2.1*] Screenshot de l'Operator installé
 * [*Challenge 2.2.2*] Screenshot de Gitlab CI/CD qui montre que Gitlab s'est connecté avec le Runner qui tourne sur Openshift
 * [*Challenge 2.2.3*] L'URL de votre repo Gitlab qui contient le pipeline (qui a bien évidemment réussi)
-* [*Challenge 2.2.5*] Screenshot des resources k8s générées 
+* [*Challenge 2.2.4*] Screenshot des resources k8s générées 
 
