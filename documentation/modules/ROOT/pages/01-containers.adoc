@@ -8,7 +8,6 @@ Avant toute chose, assurez-vous d'avoir installé quelques outils de développem
 * **Maven** : outil de construction des applications Java  
 * **Docker ou Podman** : outil qui va nous permettre de construire et exécuter des conteneurs
 
-----
 
 Le premier challenge va consister à containeriser une application.  
 L'application à containeriser se trouve ici : https://gitlab.com/redhat-scholars/antennas-front
