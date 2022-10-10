@@ -1,7 +1,7 @@
 == Résilience et scalabilité
 
 
-=== [*Challenge 6.1*]  __Beginner__
+=== [*Challenge 5.1*]  __Beginner__
 
 Ensuite, il faut mettre en place un HPA (Horizontal Pod Autoscaler). Pensez aussi à baisser les resources disponibles de votre `Deployment` (Limit and Request), mettez des valeurs assez basse pour faire réagir le HPA. 
 
@@ -38,7 +38,7 @@ spec:
 * 
 
 
-=== [*Challenge 6.2*] __Advanced__
+=== [*Challenge 5.2*] __Advanced__
 
 
 

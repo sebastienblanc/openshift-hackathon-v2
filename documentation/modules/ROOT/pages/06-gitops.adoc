@@ -2,14 +2,14 @@
 
 
 
-===  [*Challenge 7.1*]  __Beginner__
+===  [*Challenge 6.1*]  __Beginner__
 
 
 ==== Preuves à fournir 
 
 * 
 
-=== [*Challenge 7.2*] __Advanced__
+=== [*Challenge 6.2*] __Advanced__
 
 
 
