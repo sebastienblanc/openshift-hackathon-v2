@@ -1,5 +1,31 @@
 == Observabilité
 
+Une fois déployé, on aura besoin d'un aperçu de ce qui se passe avec notre application et le cluster afin que nous puissions intervenir et ajuster notre application et configuration en fonction des besoins du monde "réel"
+
 === [*Challenge 4.1*] __Beginner__
 
+Il est tres important de pouvoir observer ce qui ce passe dans le cluster. Que ce soit pour voir si une application utilise trop de ressources, ou être alerté en cas de charge inhabituelle, etc.  Vous allez découvrir que Openshift a par défaut deja pas mal de façons d'observer le cluster/les workloads/les projets etc.  Pour ce challenge vous allez devoir trouver des dashboards avec les suivants metrics:
+
+    1. *Memory Usage* du déploiement "antennas-front" [dans la vue Topology]
+    2. *CPU Usage* du déploiement "antennas-incident" dans les dernières 5 minutes  [dans la vue Developer > Observe]
+    3. *CPU Quota* de tous les projets du cluster [dans la vue Administrator > Observe ]
+
+
+
+==== Preuves à fournir 
+
+* [*Challenge 4.1.1*] Screenshots (3) des observations  
+
+
 === [*Challenge 4.2*] __Advanced__
+
+On va jouer un peu avec les "requests" et "limits" de notre déploiement antennas-front et observer comment vous pouvez apercevoir qu'est-ce qui se passe si on ne donne pas assez de resources a nos applications.  
+
+    1. Rajoutez des limits et request au deploiement 'antennas-front':
+
+        * CPU Requests: 50 millicores
+        * CPU Limits: 100 millicores
+        * Memory Requests: 50 Mi
+        * Memory Limits: 100 Mi
+    
+    2. Observer le déploiement.  Cherchez pourquoi l'application "tombe en panne".  A vous de nous le dire, et pourquoi :)  Et de nous expliquer la difference entre "requests" et "limits"
