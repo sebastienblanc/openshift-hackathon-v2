@@ -1,27 +1,38 @@
 == Helm Et Service
 
-Pour ce challenge, nous allons utiliser Helm pour déployer des ressources sur notre cluster.
 
-===   Déployer une base MariaDB avec un chart Helm [*Challenge 3.1*] __Beginner__  
-Nous allons donc déployer une base MariaDB avec un chart Helm.  
-Vous pouvez utiliser le chart Helm mariadb disponible dans le repo : https://gitlab.com/redhat-scholars/helm-charts ou ajouter le repo helm avec la commande  
-```
-helm repo add redhat-scholars-charts https://gitlab.com/api/v4/projects/39850850/packages/helm/stable
-```
-N'oubliez pas d'ajouter les valeurs pour créer l'utilisateur et la base pour que le déploiement fonctionne ;-)
+Maintenant que nous avons déployé notre application, nous allons la modifier pour que le frontend et le backend soit séparé afin d'avoir une architecture micro-services.  
+Nous allons déployer le backend en utilisant `Helm`.
+
+[#exercice1]
+===   Convertir un Template OpenShift en Chart Helm et le déployer [*Challenge 3.1*] __Beginner__  
+Notre équipe de développement a créé le micro-service `antennas-incident` et nous a mis à diposition un template OpenShift pour le déployer : https://gist.github.com/slallemand/dd8ffa0d7faeff3c247ed316812393db .  
+Cependant, nous voudrions déployer ce service en utilisant `Helm` et pour ce faire, nous allons utiliser un outil de conversion des templates OpenShift en chart `Helm` (Vous pouvez récupérer cet outil ici : https://github.com/redhat-cop/template2helm/releases).  
+
+Tips: `antennas-incident` est un micro service servant une API REST ; cette API est protégée par un secret qu'il faudra changer lors du déploiement par `helm` ;)
+
 
 ==== Preuves à fournir 
 
-* [*Challenge 3.1.1*] Output de la commande Helm
-* [*Challenge 3.1.2*] Screenshot de la base déployée
+* [*Challenge 3.1.1*] Output de la commande `helm2template`
+* [*Challenge 3.1.2*] Output de la commande `helm` qui aura déployé le micro-service `antennas-incident` ainsi que le screenshot montrant les ressources déployées dans OpenShift.
 
 
-===  [*Challenge 3.2*] __Advanced__
+[#exercice2]
+===   Modification du front pour utiliser notre nouveau service [*Challenge 3.2*] __Advanced__  
+Nous allons déployer une nouvelle version de notre front avec l'image `quay.io/rh_ee_slallema/antennas-front-jvm:remote-client`.  
+Cette nouvelle version de l'image basée sur la branche `remote-client` va nous permettre d'utiliser notre nouveau micro-service.  
+Une fois déployée cette nouvelle version du front, nous pourrons modifier sa configuration pour utiliser le micro-service `antennas-incident`.  
+Il vous faudra ajouter 2 variables d'environnements `INCIDENT_URL` et `APIKEY` contenant respectivement l'url du service `antennas-incident` et le secret nous permettant d'accéder à l'API.
 
-* [*Challenge 3.2.1*] 
-* [*Challenge 3.2.2*] 
+BONUS : vous pouvez déployer cette nouvelle version comme vous l'entendez mais vous aurez des points bonus si vous créez un chart helm pour déployer le front ;-)
 
 ==== Preuves à fournir 
 
-* 
+* [*Challenge 3.2.1*] Screenshot du déploiement de la nouvelle version du front
+* [*Challenge 3.2.2*] Screenshot des variables d'environnements de ce nouveau déploiment
+* [*Challenge 3.2.3*] BONUS : l'url du repo git ou vous aurez pousser votre chart Helm pour le front
+
+
+
 
