@@ -4,7 +4,7 @@ Une fois déployé, on aura besoin d'un aperçu de ce qui se passe avec notre ap
 
 === [*Challenge 4.1*] __Beginner__
 
-Il est tres important de pouvoir observer ce qui ce passe dans le cluster. Que ce soit pour voir si une application utilise trop de ressources, ou être alerté en cas de charge inhabituelle, etc.  Vous allez découvrir que Openshift a par défaut deja pas mal de façons d'observer le cluster/les workloads/les projets etc.  Pour ce challenge vous allez devoir trouver des dashboards avec les suivants metrics:
+Il est tres important de pouvoir observer ce qui ce passe dans le cluster. Que ce soit pour voir si une application utilise trop de ressources, ou être alerté en cas de charge inhabituelle, etc.  Vous allez découvrir que Openshift a par défaut deja pas mal de façons d'observer le cluster/les workloads/les projets etc.  Pour ce challenge vous allez devoir trouver des dashboards avec les suivants métriques:
 
     1. *Memory Usage* du déploiement "antennas-front" [dans la vue Topology]
     2. *CPU Usage* du déploiement "antennas-incident" dans les dernières 5 minutes  [dans la vue Developer > Observe]
@@ -21,7 +21,7 @@ Il est tres important de pouvoir observer ce qui ce passe dans le cluster. Que c
 
 On va jouer un peu avec les "requests" et "limits" de notre déploiement antennas-front et observer comment vous pouvez apercevoir qu'est-ce qui se passe si on ne donne pas assez de resources a nos applications.  
 
-    1. Rajoutez des limits et request au deploiement 'antennas-front':
+    1. Rajoutez des limits et request au déploiement 'antennas-front'. Bien sur en modifiant votre repo et redéployant avec Gitlab CI/CD 
 
         * CPU Requests: 50 millicores
         * CPU Limits: 100 millicores
@@ -29,3 +29,16 @@ On va jouer un peu avec les "requests" et "limits" de notre déploiement antenna
         * Memory Limits: 100 Mi
     
     2. Observer le déploiement.  Cherchez pourquoi l'application "tombe en panne".  A vous de nous le dire, et pourquoi :)  Et de nous expliquer la difference entre "requests" et "limits"
+
+    3. Ajuster les limites/requests de façon que l'application fonctionne mais sans utiliser trop de ressources.  
+
+==== Preuves à fournir 
+
+* [*Challenge 4.2.1*] Screenshots du yaml du déploiement 
+* [*Challenge 4.2.1*] Envoyer nous les  nouvelles valeurs pour les limites et requêtes avec la raison pour lequel vous avez choisis ces valeurs.
+
+=== BONUS challenge
+
+Avec Quarkus c'est assez facile de rajouter des fonctionnalités qui peuvent être utile dans des déploiements Kubernetes.  Essayez de rajouter l'extension Quarkus qui s'appelle 'micrometer' pour intégrer des métriques Java dans l’observabilité de Openshift.   Voici un lien pour commencer: https://quarkus.io/blog/micrometer-prometheus-openshift/
+
+    
