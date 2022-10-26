@@ -1,7 +1,14 @@
 == Résilience et scalabilité
 
+[#exercice1]
+=== [*Challenge 5.1*]  Résilience et scalabilité __Beginner__
+L'application `antennas-incident` a 2 endpoints qui fournissent des health checks : 
 
-=== [*Challenge 5.1*]  __Beginner__
+* `q/health/live` pour le liveness probe
+* `q/health/ready` pour le readyness probe 
+
+Il va falloir mettre à jour les resources K8s afin d'utiliser ces probes.  
+
 
 Ensuite, il faut mettre en place un HPA (Horizontal Pod Autoscaler). Pensez aussi à baisser les resources disponibles de votre `Deployment` (Limit and Request), mettez des valeurs assez basse pour faire réagir le HPA. 
 
@@ -19,7 +26,7 @@ metadata:
 spec:
   scaleTargetRef:
     kind: Deployment
-    name: antennas-incident
+    name: mydeployment
     apiVersion: apps/v1
   minReplicas: 1
   maxReplicas: 3
@@ -35,8 +42,8 @@ spec:
 
 ==== Preuves à fournir 
 
-* 
-
+* [*Challenge 5.1.1*] Screenshot ou manifest yaml du déploiment d'antennas-incident montrant les `readinessProbe` et `livenessProbe`
+* [*Challenge 5.1.2*] Screenshot de la console faisant apparaître "Autoscaled to ..." ou manifest yaml du HPA
 
 === [*Challenge 5.2*] __Advanced__
 
