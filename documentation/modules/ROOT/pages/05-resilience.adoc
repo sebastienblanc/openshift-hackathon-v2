@@ -45,7 +45,9 @@ spec:
 * [*Challenge 5.1.1*] Screenshot ou manifest yaml du déploiment d'antennas-incident montrant les `readinessProbe` et `livenessProbe`
 * [*Challenge 5.1.2*] Screenshot de la console faisant apparaître "Autoscaled to ..." ou manifest yaml du HPA
 
-=== [*Challenge 5.2*] __Advanced__
+
+[#exercice2]
+=== [*Challenge 5.2*] Chaos Kube__Advanced__
 
 
 
