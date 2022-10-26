@@ -29,7 +29,7 @@ Il vous faudra ajouter 2 variables d'environnements `INCIDENT_URL` et `APIKEY` c
 
 ==== Preuves à fournir 
 
-* [*Challenge 3.2.1*] Screenshot du déploiement de la nouvelle version du front
+* [*Challenge 3.2.1*] Screenshot du déploiement de la nouvelle version du front + output de la commande `helm get all <nom_de_la_release_antennas_incident>`
 * [*Challenge 3.2.2*] Screenshot des variables d'environnements de ce nouveau déploiment
 * [*Challenge 3.2.3*] **BONUS** : l'url du repo git ou vous aurez pousser votre chart Helm pour le front
 
