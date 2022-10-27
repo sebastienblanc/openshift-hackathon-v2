@@ -5,7 +5,7 @@
 L'application `antennas-incident` a 2 endpoints qui fournissent des health checks : 
 
 * `q/health/live` pour le liveness probe
-* `q/health/ready` pour le readyness probe 
+* `q/health/ready` pour le readiness probe 
 
 Il va falloir mettre à jour les resources K8s afin d'utiliser ces probes.  
 
@@ -42,7 +42,7 @@ spec:
 
 ==== Preuves à fournir 
 
-* [*Challenge 5.1.1*] Screenshot ou manifest yaml du déploiment d'antennas-incident montrant les `readinessProbe` et `livenessProbe`
+* [*Challenge 5.1.1*] Screenshot ou manifest yaml du déploiement d'antennas-incident montrant les `readinessProbe` et `livenessProbe`
 * [*Challenge 5.1.2*] Screenshot de la console faisant apparaître "Autoscaled to ..." ou manifest yaml du HPA
 
 

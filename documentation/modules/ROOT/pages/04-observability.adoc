@@ -39,6 +39,10 @@ On va jouer un peu avec les "requests" et "limits" de notre déploiement antenna
 
 === BONUS challenge
 
-Avec Quarkus c'est assez facile de rajouter des fonctionnalités qui peuvent être utile dans des déploiements Kubernetes.  Essayez de rajouter l'extension Quarkus qui s'appelle 'micrometer' pour intégrer des métriques Java dans l’observabilité de Openshift.   Voici un lien pour commencer: https://quarkus.io/blog/micrometer-prometheus-openshift/
+Avec Quarkus c'est assez facile de rajouter des fonctionnalités qui peuvent être utile dans des déploiements Kubernetes.  Essayez de rajouter l'extension Quarkus qui s'appelle 'micrometer' pour intégrer des métriques Java dans l'observabilité de Openshift.   Voici un lien pour commencer: https://quarkus.io/blog/micrometer-prometheus-openshift/
+
+Vous pouvez aussi regarder la branche 'micrometer' du repository antennas-front.  
+
+* [*Challenge 4.3.1*] Screenshot de Developer > Observe > Metrics avec les resultats du custom query `jvm_memory_used_bytes{area="nonheap",id="CodeHeap 'profiled nmethods'",}`
 
     
