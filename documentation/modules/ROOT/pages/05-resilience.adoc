@@ -2,17 +2,17 @@
 
 [#exercice1]
 === [*Challenge 5.1*]  Résilience et scalabilité __Beginner__
-L'application `antennas-incident` a 2 endpoints qui fournissent des health checks : 
+L'application `antennas-incident` a 2 endpoints qui fournissent des health checks :
 
 * `q/health/live` pour le liveness probe
-* `q/health/ready` pour le readiness probe 
+* `q/health/ready` pour le readiness probe
 
-Il va falloir mettre à jour les resources K8s afin d'utiliser ces probes.  
+Il va falloir mettre à jour les resources K8s afin d'utiliser ces probes.
 
 
-Ensuite, il faut mettre en place un HPA (Horizontal Pod Autoscaler). Pensez aussi à baisser les resources disponibles de votre `Deployment` (Limit and Request), mettez des valeurs assez basse pour faire réagir le HPA. 
+Ensuite, il faut mettre en place un HPA (Horizontal Pod Autoscaler). Pensez aussi à baisser les resources disponibles de votre `Deployment` (Limit and Request), mettez des valeurs assez basse pour faire réagir le HPA.
 
-Voici un example d'un HPA : 
+Voici un example d'un HPA :
 
 [.console-output]
 [source,text]
@@ -40,21 +40,158 @@ spec:
 
 ----
 
-==== Preuves à fournir 
+==== Preuves à fournir
 
 * [*Challenge 5.1.1*] Screenshot ou manifest yaml du déploiement d'antennas-incident montrant les `readinessProbe` et `livenessProbe`
 * [*Challenge 5.1.2*] Screenshot de la console faisant apparaître "Autoscaled to ..." ou manifest yaml du HPA
 
 
 [#exercice2]
-=== [*Challenge 5.2*] Chaos Kube__Advanced__
 
+=== [*Challenge 5.2*] Chaos Kube
 
+==== Chaos testing with chaoskube
 
-==== Preuves à fournir 
+Github repository du project: https://github.com/linki/chaoskube/
 
-* 
+===== Introduction
 
+Le principe est de mettre en place un outil qui va nous permettre de
+simuler des pannes aléatoires sur un projet afin d’améliorer la
+résistance des applications pour surmonter ces pannes en utilisant des
+fonctionnalités de kubernetes.
 
+===== Installation de chaoskube
 
+====== Préambule
 
+Sur OpenShift les SCCs (Security Context Constraints) ajoute un niveau
+de sécurité supplémentaire au cluster kubernetes qui n’existe pas sur la
+plupart des versions kubernetes alternatives. Cependant, ce niveau de
+sécurité plus élevé demande parfois un peu d’adaptation pour pouvoir
+deployer des applications qui n’ont pas été testée sur OpenShift. A
+noter, que ça n’est pas réciproque, une application packagée et testée
+pour OpenShift se déploiera généralement sans modifications sur une
+autre distribution kubernetes.
+
+[source,sh]
+----
+oc new-project chaoskube
+oc adm policy add-scc-to-user runasanyuid -z chaoskube
+----
+
+====== Déploiement Helm
+
+Ensuite, procéder à l’installation comme spécifié dans la documentation
+en ométtant de créer le namespace:
+
+[source,sh]
+----
+helm repo add chaoskube https://linki.github.io/chaoskube/
+helm install chaoskube chaoskube/chaoskube --atomic --namespace=chaoskube
+----
+
+Vérifier le bon déploiement:
+
+[source,sh]
+----
+$ oc -n chaoskube get pods
+NAME                        READY   STATUS    RESTARTS   AGE
+chaoskube-b88449d95-zfbv7   1/1     Running   0          6s
+
+$ oc -n chaoskube logs -f $(oc -n chaoskube get pods -l app.kubernetes.io/instance=chaoskube -oname)
+...
+----
+
+====== Cleanup
+
+Chaoskube devrait être déployé et fonctionnel. Cependant, nous
+souhaitons le paramètrer pour ne cibler que des applications spécifiques
+et à une fréquence différente.
+
+Pour consulter les paramètres de configuration disponibles, vous pouvez
+lire la documentation mais également les consulter de la façon suivante:
+
+[source,sh]
+----
+oc -n chaoskube exec -ti  $(oc -n chaoskube get pods -l app.kubernetes.io/instance=chaoskube -oname) --  /usr/local/bin/chaoskube --help
+usage: chaoskube [<flags>]
+
+Flags:
+  --help                         Show context-sensitive help (also try --help-long and --help-man).
+  --labels=LABELS                A set of labels to restrict the list of affected pods. Defaults to everything.
+...
+----
+
+Pour supprimer le déploiement de chaoskube:
+
+[source,sh]
+----
+helm uninstall chaoskube
+----
+
+_Note_: un chart helm peut être ``customizé'' en utilisant un fichier
+values.yaml qui override les paramètres par défaut.
+
+==== [*Challenge 5.2.1*] Chaos Kube __Beginner__
+
+En partant d’un déploiement simple, utiliser chaoskube pour tester la
+résillience de cette application:
+* cibler exclusivement le namespace de l’application
+* tuer des ressources toutes les 15 secondes
+
+[source,yaml]
+----
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: chaoskube-test
+  name: chaoskube-test
+  namespace: chaoskube-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chaoskube-test
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: chaoskube-test
+    spec:
+      containers:
+      - command:
+        - /bin/sh
+        - -c
+        - sleep INF
+        image: quay.io/xymox/ubi8-debug-toolkit:latest
+        name: ubi8-debug-toolkit
+        resources: {}
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              topologyKey: kubernetes.io/hostname
+status: {}
+----
+
+TIP: Vous pouvez modifier les paramêtres de ce descripteur de déploiement pour augmenter la disponibilité de l’applications
+
+===== Preuves à fournir
+
+* [*Challenge 5.2.1.1*] logs chaoskube prouvant la destruction de pods dans l’intervalle de temps défini
+* [*Challenge 5.2.1.2*] Ouput des pods applicatifs incluant leur statut et leur age demontrant la disponibilité de l’application malgré les destructions aléatoires
+
+==== [*Challenge 5.2.2*] Chaos Kube __Advanced__
+
+En utilisant le projet antenna-front, configurez chaoskube pour y
+appliquer le chaos testing.
+
+===== Preuves à fournir
+
+* [*Challenge 5.2.2.1*] logs chaoskube prouvant la destruction de pods dans l’intervalle de temps défini
+* [*Challenge 5.2.2.2*] Test de l’API (http) pendant 2 minutes affichant son taux de disponibilité (script utilisé + résultats)
