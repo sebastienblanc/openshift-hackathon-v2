@@ -14,7 +14,7 @@ Tips: `antennas-incident` est un micro service servant une API REST ; cette API 
 
 ==== Preuves à fournir 
 
-* [*Challenge 3.1.1*] Output de la commande `helm2template`
+* [*Challenge 3.1.1*] Output de la commande `template2helm`
 * [*Challenge 3.1.2*] Output de la commande `helm` qui aura déployé le micro-service `antennas-incident` ainsi que le screenshot montrant les ressources déployées dans OpenShift.
 
 
