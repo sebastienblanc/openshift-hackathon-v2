@@ -4,6 +4,7 @@ Le premier challenge va consister à containeriser une application.
 L'application à containeriser se trouve ici : https://gitlab.com/redhat-scholars/antennas-front
 
 Pensez bien à forker ce dépôt ! Vous allez travailler sur cette application pendant les 2 prochaines journées.  
+Le repo devra être en mode public.  
 
 N'oubliez pas de packager votre application avant de commencer à la containeriser.  
 Vous pouvez utiliser la commande Maven `mvn clean package`.
