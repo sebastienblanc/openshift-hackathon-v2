@@ -4,7 +4,7 @@ Une fois déployé, on aura besoin d'un aperçu de ce qui se passe avec notre ap
 
 === [*Challenge 4.1*] __Beginner__
 
-Il est tres important de pouvoir observer ce qui ce passe dans le cluster. Que ce soit pour voir si une application utilise trop de ressources, ou être alerté en cas de charge inhabituelle, etc.  Vous allez découvrir que Openshift a par défaut deja pas mal de façons d'observer le cluster/les workloads/les projets etc.  Pour ce challenge vous allez devoir trouver des dashboards avec les suivants métriques:
+Il est très important de pouvoir observer ce qui se passe dans le cluster. Que ce soit pour voir si une application utilise trop de ressources, ou être alerté en cas de charge inhabituelle, etc.  Vous allez découvrir que OpenShift a par défaut déjà pas mal de façons d'observer le cluster/les workloads/les projets etc.  Pour ce challenge vous allez devoir trouver des dashboards avec les métriques suivantes:
 
     1. *Memory Usage* du déploiement "antennas-front" [dans la vue Topology]
     2. *CPU Usage* du déploiement "antennas-incident" dans les dernières 5 minutes  [dans la vue Developer > Observe]
@@ -19,30 +19,30 @@ Il est tres important de pouvoir observer ce qui ce passe dans le cluster. Que c
 
 === [*Challenge 4.2*] __Advanced__
 
-On va jouer un peu avec les "requests" et "limits" de notre déploiement antennas-front et observer comment vous pouvez apercevoir qu'est-ce qui se passe si on ne donne pas assez de resources a nos applications.  
+On va jouer un peu avec les "requests" et "limits" de notre déploiement antennas-front et observer ce qui se passe si on ne donne pas assez de resources à nos applications.  
 
-    1. Rajoutez des limits et request au déploiement 'antennas-front'. Bien sur en modifiant votre repo et redéployant avec Gitlab CI/CD 
+    1. Rajoutez des limits et request au déploiement 'antennas-front'. Bien sûr en modifiant votre repo et en redéployant avec GitLab CI/CD 
 
         * CPU Requests: 50 millicores
         * CPU Limits: 100 millicores
         * Memory Requests: 50 Mi
         * Memory Limits: 100 Mi
     
-    2. Observer le déploiement.  Cherchez pourquoi l'application "tombe en panne".  A vous de nous le dire, et pourquoi :)  Et de nous expliquer la difference entre "requests" et "limits"
+    2. Observer le déploiement.  Cherchez pourquoi l'application "tombe en panne".  À vous de nous le dire, et pourquoi :)  Et de nous expliquer la différence entre "requests" et "limits"
 
-    3. Ajuster les limites/requests de façon que l'application fonctionne mais sans utiliser trop de ressources.  
+    3. Ajuster les limits/requests de manière à ce que l'application fonctionne, mais sans utiliser trop de ressources.  
 
 ==== Preuves à fournir 
 
 * [*Challenge 4.2.1*] Screenshots du yaml du déploiement 
-* [*Challenge 4.2.1*] Envoyer nous les  nouvelles valeurs pour les limites et requêtes avec la raison pour lequel vous avez choisis ces valeurs.
+* [*Challenge 4.2.1*] Nouvelles valeurs de limits/requests avec la raison pour laquelle vous avez choisi ces valeurs.
 
 === BONUS challenge
 
-Avec Quarkus c'est assez facile de rajouter des fonctionnalités qui peuvent être utile dans des déploiements Kubernetes.  Essayez de rajouter l'extension Quarkus qui s'appelle 'micrometer' pour intégrer des métriques Java dans l'observabilité de Openshift.   Voici un lien pour commencer: https://quarkus.io/blog/micrometer-prometheus-openshift/
+Avec Quarkus c'est assez facile de rajouter des fonctionnalités qui peuvent être utiles dans des déploiements Kubernetes.  Essayez de rajouter l'extension Quarkus qui s'appelle 'micrometer' pour intégrer des métriques Java dans l'observabilité de OpenShift.   Voici un lien pour commencer: https://quarkus.io/blog/micrometer-prometheus-openshift/
 
 Vous pouvez aussi regarder la branche 'micrometer' du repository antennas-front.  
 
-* [*Challenge 4.3.1*] Screenshot de Developer > Observe > Metrics avec les resultats du custom query `jvm_memory_used_bytes{area="nonheap",id="CodeHeap 'profiled nmethods'",}`
+* [*Challenge 4.3.1*] Screenshot de Developer > Observe > Metrics avec les résultats de la custom query `jvm_memory_used_bytes{area="nonheap",id="CodeHeap 'profiled nmethods'",}`
 
     

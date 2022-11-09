@@ -3,19 +3,19 @@
 Bienvenue pour ce dernier défi et non des moindres !
 En effet, dans ce défi vous aurez pour tâche de mettre en place l'automatisation nécessaire pour déployer l'application via des processus GitOps.
 
-Entre temps, l'application que vous avez manipulé a un peu évolué :
+Entre temps, l'application que vous avez manipulée a un peu évolué :
 
 * *antennas-front* fait maintenant des appels API (REST) à un composant *antennas-incident*.
 * *antennas-incident* s'appuie sur une base de données MariaDB pour stocker ses données.
 
-Un troisième entrepôt Git fait son apparition, *antennas-gitops*, pour stocker les manifestes Kubernetes à déployer.
+Un troisième entrepôt Git fait son apparition, *antennas-gitops*, pour stocker les manifests Kubernetes à déployer.
 
 .Processus GitOps
 image::gitops.png[]
 
 Le pipeline CI/CD que nous allons mettre en oeuvre ira construire l'application et son image de conteneur.
 Il déploiera l'application dans un environnement de test pour y dérouler des tests d'intégration.
-Ensuite, si ces tests sont concluants, il mettra à jour les manifests Kubernetes avec la nouvelle image de conteneur et créera une _Merge Request_ sur Gitlab.
+Ensuite, si ces tests sont concluants, il mettra à jour les manifests Kubernetes avec la nouvelle image de conteneur et créera une _Merge Request_ sur GitLab.
 
 Une fois cette _Merge Request_ fusionnée dans la branche principale, *OpenShift GitOps* ira appliquer ces changements dans l'environnement de production.
 
@@ -23,7 +23,7 @@ Une fois cette _Merge Request_ fusionnée dans la branche principale, *OpenShift
 
 Faites une copie de votre entrepôt Git *antennas-front*
 
-* Allez sur la page d'accueil de https://gitlab.com[Gitlab]
+* Allez sur la page d'accueil de https://gitlab.com[GitLab]
 * Cliquez sur l'entrepôt *antennas-front*
 * Naviguez dans *Paramètres* > *Général*
 * Changez le nom du projet en *antennas-front-backup*
@@ -52,11 +52,11 @@ oc new-project antennas-prod
 
 IMPORTANT: L'opérateur GitLab Runner a un bug (corrigé chez GitLab mais pas encore livré) qui va nous gêner dans ce défi. Pour cela, vous devrez désinstaller l'opérateur GitLab Runner que vous avez installé dans le défi numéro 2 et installer une version béta.
 
-Désinstaller l'opérateur GitLab Runner.
+Désinstallez l'opérateur GitLab Runner.
 
 * Dans la console OpenShift, allez dans la vue *Administrator*
 * Dépliez *Operators* > *Installed Operators*
-* En face de la ligne *Gitlab Runner*, cliquez sur les trois petits points et sélectionnez *Uninstall Operator*
+* En face de la ligne *GitLab Runner*, cliquez sur les trois petits points et sélectionnez *Uninstall Operator*
 
 Installez l'opérateur GitLab Runner en version béta.
 
@@ -116,11 +116,11 @@ TIP: notez soigneusement le jeton généré !
 
 TIP: notez soigneusement le mot de passe généré ainsi que votre identifiant (champ **Username** sur la même page) !
 
-* Allez sur l'entrepôt *antennas-front* dans https://gitlab.com[Gitlab]
+* Allez sur l'entrepôt *antennas-front* dans https://gitlab.com[GitLab]
 * Ouvrez *Paramètres* > *Intégration et livraison continues*
 * Dépliez la section *Variables*
 * Créez trois variables :
-  - *GITLAB_TOKEN* qui contient le _Personal Access Token_ Gitlab
+  - *GITLAB_TOKEN* qui contient le _Personal Access Token_ GitLab
   - *QUAY_PASSWORD* qui contient votre _Encrypted Password_ Quay.io
   - *QUAY_USERNAME* qui contient votre identifiant Quay.io
 
@@ -142,9 +142,9 @@ variables:
 
 * *ANTENNAS_FRONT_IMAGE* est l'entrepôt quay.io que vous avez créé lors du premier défi
 * *ANTENNAS_GITOPS_REPOSITORY* est l'entrepôt *antennas-gitops* que vous avez copié précédemment
-* *BOT_EMAIL* est l'adresse email rattachée à votre compte Gitlab
+* *BOT_EMAIL* est l'adresse email rattachée à votre compte GitLab
 
-A cette étape, le pipeline CI/CD doit se terminer sans erreur.
+À cette étape, le pipeline CI/CD doit se terminer sans erreur.
 Si ce n'est pas le cas, revérifiez les étapes ci-dessus et appelez un facilitateur !
 
 NOTE: Le pipeline déploie l'application dans l'environnement de test mais pas encore dans l'environnement de production car c'est tout l'objet du défi suivant !
@@ -152,7 +152,7 @@ NOTE: Le pipeline déploie l'application dans l'environnement de test mais pas e
 
 ===  [*Challenge 6.1*]  __Beginner__
 
-Dans ce défi, votre tâche est de compléter le processus GitOps pour que lorsque la _Merge Request_ (entrepôt *antennas-gitops*) créée par pipeline Gitlab CI est fusionnée, les changements sont appliqués à l'environnement de production (projet *antennas-prod*).
+Dans ce défi, votre tâche est de compléter le processus GitOps pour que lorsque la _Merge Request_ (entrepôt *antennas-gitops*) créée par pipeline GitLab CI est fusionnée, les changements sont appliqués à l'environnement de production (projet *antennas-prod*).
 
 Il vous faudra :
 
@@ -171,7 +171,7 @@ Ah, et n'oubliez pas de configurer votre application ArgoCD pour que les manifes
 oc get route -n openshift-gitops openshift-gitops-server -o jsonpath='https://{.spec.host}/api/webhook'
 ----
 
-* Le pipeline Gitlab CI met 5 minutes à s'exécuter. Vous pouvez le court-circuiter durant la phase de mise au point en éditant directement les fichiers dans l'entrepôt *antennas-gitops*.
+* Le pipeline GitLab CI met 5 minutes à s'exécuter. Vous pouvez le court-circuiter durant la phase de mise au point en éditant directement les fichiers dans l'entrepôt *antennas-gitops*.
 
 ===============================
 
@@ -199,7 +199,7 @@ Le principe est le suivant :
 * Si les tests de mise en production sont satisfaisants, on bascule le trafic vers l'instance *verte*.
 * À la livraison suivante, c'est l'inverse : c'est l'instance *bleue* qui sera mise à jour. Et ainsi de suite... 
 
-Dans la branche *gitops* de l'entrepôt *antennas-front* vous avez un pipeline Gitlab CI adapté à ce type de livraison.
+Dans la branche *gitops* de l'entrepôt *antennas-front* vous avez un pipeline GitLab CI adapté à ce type de livraison.
 Observez bien son fonctionnement ainsi que les différences avec celui de la branche *main*.
 
 Dans la branche *gitops* de l'entrepôt *antennas-gitops* vous avez un _Chart Helm_ mis à jour avec deux instances de l'application, une verte et une bleue.
@@ -209,9 +209,9 @@ Votre tâche sera de trouver un moyen de faire la bascule *vert* / *bleu*.
 .Astuces en vrac
 [TIP]
 ===============================
-* Le pipeline Gitlab CI met à jour le fichier *values-prod.yaml* dans l'entrepôt *antennas-gitops* avec la cible active (deux valeurs possibles: *blue* et *green*). À vous d'utiliser cette valeur dans le _Chart Helm_ pour créer l'objet Kubernetes qui vous permettra de faire la bascule. 
+* Le pipeline GitLab CI met à jour le fichier *values-prod.yaml* dans l'entrepôt *antennas-gitops* avec la cible active (deux valeurs possibles: *blue* et *green*). À vous d'utiliser cette valeur dans le _Chart Helm_ pour créer l'objet Kubernetes qui vous permettra de faire la bascule. 
 
-* Le pipeline Gitlab CI met 5 minutes à s'exécuter. Vous pouvez le court-circuiter durant la phase de mise au point en éditant directement les fichiers dans l'entrepôt *antennas-gitops*.
+* Le pipeline GitLab CI met 5 minutes à s'exécuter. Vous pouvez le court-circuiter durant la phase de mise au point en éditant directement les fichiers dans l'entrepôt *antennas-gitops*.
 
 * N'oubliez pas de mettre à jour votre *Application* ArgoCD avec la bonne branche Git (*blue-green*) et les bons paramètres _Helm_ !
 
@@ -227,4 +227,4 @@ Pour vous aider, vous pouvez vous appuyer sur la documentation suivante.
 ==== Preuves à fournir
 
 * Capture d'écran de l'objet Kubernetes qui vous a servi à la bascule, une fois en vert, une fois en bleu.
-* Capture d'écran de votre pipeline Gitlab CI terminé avec succès
+* Capture d'écran de votre pipeline GitLab CI terminé avec succès
