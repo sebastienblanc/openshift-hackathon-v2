@@ -28,7 +28,7 @@ Il vous faudra ajouter 2 variables d'environnement `INCIDENT_URL` et `APIKEY` co
 
 ==== Preuves à fournir 
 
-* [*Challenge 3.2.1*] Screenshot du déploiement de la nouvelle version du front + output de la commande `helm get all <nom_de_la_release_antennas_incident>`
+* [*Challenge 3.2.1*] Manifest yaml montrant la version de l'image utilisée
 * [*Challenge 3.2.2*] Screenshot des variables d'environnement de ce nouveau déploiement
 
 
