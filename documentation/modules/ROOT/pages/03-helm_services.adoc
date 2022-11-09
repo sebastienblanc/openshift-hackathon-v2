@@ -25,14 +25,14 @@ Cette nouvelle version de l'image basée sur la branche `remote-client` va nous 
 Une fois déployée cette nouvelle version du front, nous pourrons modifier sa configuration pour utiliser le micro-service `antennas-incident`.  
 Il vous faudra ajouter 2 variables d'environnements `INCIDENT_URL` et `APIKEY` contenant respectivement l'url du service `antennas-incident` et le secret nous permettant d'accéder à l'API.
 
-**BONUS** : vous pouvez déployer cette nouvelle version comme vous l'entendez mais vous aurez des points bonus si vous créez un chart helm pour déployer le front ;-)
 
 ==== Preuves à fournir 
 
 * [*Challenge 3.2.1*] Screenshot du déploiement de la nouvelle version du front + output de la commande `helm get all <nom_de_la_release_antennas_incident>`
 * [*Challenge 3.2.2*] Screenshot des variables d'environnements de ce nouveau déploiment
-* [*Challenge 3.2.3*] **BONUS** : l'url du repo git ou vous aurez pousser votre chart Helm pour le front
 
 
+**BONUS 3.3** : vous pouvez déployer cette nouvelle version comme vous l'entendez mais vous aurez des points bonus si vous créez un chart helm pour déployer le front ;-)  
 
-
+==== Preuves à fournir 
+* [*Challenge 3.3*] **BONUS** : l'url du repo git ou vous aurez pousser votre chart Helm pour le front
