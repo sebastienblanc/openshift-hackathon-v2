@@ -5,20 +5,20 @@
 [.text-center.strong]
 == Bienvenue au Hackathon ! 
 
-Vous trouverez ici le contenu des différents challenges ainsi que des resources techniques.
+Vous trouverez ici le contenu des différents challenges ainsi que des ressources techniques.
 
-Assurez-vous aussi de bien rejoindre le channel Slack car c'est par ce moyen que vous allez fournrir les preuves pour chaque challenge : https://rhdevnation.slack.com/archives/C03FGU9LR2N
+Assurez-vous aussi de bien rejoindre le channel Slack car c'est par ce moyen que vous allez fournir les preuves pour chaque challenge : https://rhdevnation.slack.com/archives/C03FGU9LR2N
 
 == Fournir les preuves 
 
-Dès que vous avez completé un challenge, un membre de votre équipe, enverra un message sur le channel avec en préfixe, le nom de l'équipe et le numéro du challenge, par exemple *[Equipe1 - Challenge 1.1.1]* suivis du screnshot ou bien de l'URL.
+Dès que vous avez complété un challenge, un membre de votre équipe, enverra un message sur le channel avec en préfixe, le nom de l'équipe et le numéro du challenge, par exemple *[Equipe1 - Challenge 1.1.1]* suivis du screnshot ou bien de l'URL.
 
 == Le comptage des points
 
-Chaque challenge contient 2 sous-challenge ceux-ci contiennent un certains nombre de preuves à fournir. 
-Chaque sous-challenge rapporte 5 points lorsque toutes les preuves ont été fournis.
+Chaque challenge contient 2 sous-challenges; ceux-ci contiennent un certain nombre de preuves à fournir. 
+Chaque sous-challenge rapporte 5 points lorsque toutes les preuves ont été fournies.
 
-Par exemple pour avoir les 5 points du Challenge 1.1 , il faudra fournir les preuves 1.1.1, 1.1.2 et 1.1.3
+Par exemple pour avoir les 5 points du Challenge 1.1, il faudra fournir les preuves 1.1.1, 1.1.2 et 1.1.3
 
 Des points bonus sont attribués pour les premières équipes fournissant les preuves :
 
@@ -26,7 +26,7 @@ Des points bonus sont attribués pour les premières équipes fournissant les pr
 * Deuxième équipe : +2 points
 * Troisième équipe : +1 points
 
-== Les resources
+== Les ressources
 
 * http://dn.dev/learn
 * http://quarkus.io

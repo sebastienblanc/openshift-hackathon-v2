@@ -10,9 +10,9 @@ L'application `antennas-incident` a 2 endpoints qui fournissent des health check
 Il va falloir mettre à jour les resources K8s afin d'utiliser ces probes.
 
 
-Ensuite, il faut mettre en place un HPA (Horizontal Pod Autoscaler). Pensez aussi à baisser les resources disponibles de votre `Deployment` (Limit and Request), mettez des valeurs assez basse pour faire réagir le HPA.
+Ensuite, il faut mettre en place un HPA (Horizontal Pod Autoscaler). Pensez aussi à baisser les ressources disponibles de votre `Deployment` (Limit et Request), mettez des valeurs assez basses pour faire réagir le HPA.
 
-Voici un example d'un HPA :
+Voici un exemple d'un HPA :
 
 [.console-output]
 [source,text]
@@ -52,7 +52,7 @@ spec:
 
 ==== Chaos testing with chaoskube
 
-Github repository du project: https://github.com/linki/chaoskube/
+GitHub repository du projet: https://github.com/linki/chaoskube/
 
 ===== Introduction
 
@@ -69,9 +69,9 @@ Sur OpenShift les SCCs (Security Context Constraints) ajoute un niveau
 de sécurité supplémentaire au cluster kubernetes qui n’existe pas sur la
 plupart des versions kubernetes alternatives. Cependant, ce niveau de
 sécurité plus élevé demande parfois un peu d’adaptation pour pouvoir
-deployer des applications qui n’ont pas été testée sur OpenShift. A
-noter, que ça n’est pas réciproque, une application packagée et testée
-pour OpenShift se déploiera généralement sans modifications sur une
+deployer des applications qui n’ont pas été testées sur OpenShift. À
+noter que ça n’est pas réciproque, une application packagée et testée
+pour OpenShift se déploiera généralement sans modification sur une
 autre distribution kubernetes.
 
 [source,sh]
@@ -83,7 +83,7 @@ oc adm policy add-scc-to-user runasanyuid -z chaoskube
 ====== Déploiement Helm
 
 Ensuite, procéder à l’installation comme spécifié dans la documentation
-en ométtant de créer le namespace:
+en omettant de créer le namespace:
 
 [source,sh]
 ----
@@ -106,7 +106,7 @@ $ oc -n chaoskube logs -f $(oc -n chaoskube get pods -l app.kubernetes.io/instan
 ====== Cleanup
 
 Chaoskube devrait être déployé et fonctionnel. Cependant, nous
-souhaitons le paramètrer pour ne cibler que des applications spécifiques
+souhaitons le paramétrer pour ne cibler que des applications spécifiques
 et à une fréquence différente.
 
 Pour consulter les paramètres de configuration disponibles, vous pouvez
@@ -130,13 +130,13 @@ Pour supprimer le déploiement de chaoskube:
 helm uninstall chaoskube
 ----
 
-_Note_: un chart helm peut être ``customizé'' en utilisant un fichier
-values.yaml qui override les paramètres par défaut.
+_Note_: un chart helm peut être configuré en utilisant un fichier
+values.yaml qui remplace les paramètres par défaut.
 
 ==== [*Challenge 5.2.1*] Chaos Kube __Beginner__
 
 En partant d’un déploiement simple, utiliser chaoskube pour tester la
-résillience de cette application:
+résilience de cette application:
 * cibler exclusivement le namespace de l’application
 * tuer des ressources toutes les 15 secondes
 
@@ -179,12 +179,12 @@ spec:
 status: {}
 ----
 
-TIP: Vous pouvez modifier les paramêtres de ce descripteur de déploiement pour augmenter la disponibilité de l’applications
+TIP: Vous pouvez modifier les paramètres de ce descripteur de déploiement pour augmenter la disponibilité de l’application
 
 ===== Preuves à fournir
 
 * [*Challenge 5.2.1.1*] logs chaoskube prouvant la destruction de pods dans l’intervalle de temps défini
-* [*Challenge 5.2.1.2*] Ouput des pods applicatifs incluant leur statut et leur age demontrant la disponibilité de l’application malgré les destructions aléatoires
+* [*Challenge 5.2.1.2*] Output des pods applicatifs incluant leur statut et leur âge démontrant la disponibilité de l’application malgré les destructions aléatoires
 
 ==== [*Challenge 5.2.2*] Chaos Kube __Advanced__
 

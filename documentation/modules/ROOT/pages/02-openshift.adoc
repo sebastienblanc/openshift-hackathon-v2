@@ -1,4 +1,4 @@
-== Déployer votre image de container sur Openshift avec Gitlab CI/CD
+== Déployer votre image de container sur OpenShift avec GitLab CI/CD
 
 Ce matin vous avez créé votre image de container, il est maintenant temps de la déployer sur votre cluster OpenShift ! 
 [#exercice1]
@@ -6,7 +6,7 @@ Ce matin vous avez créé votre image de container, il est maintenant temps de l
 
 Utilisez la perspective "Developer" de votre console OpenShift pour déployer votre image.
 Vous pouvez utiliser le projet **"default"** pour cette étape.  
-Profitez en pour vous familiariser avec les objets OpenShift (POD, Deploymement, Service, Route ...).
+Profitez en pour vous familiariser avec les objets OpenShift (POD, Deployment, Service, Route ...).
 
 ==== Preuves à fournir 
 
@@ -16,13 +16,13 @@ Profitez en pour vous familiariser avec les objets OpenShift (POD, Deploymement,
 
 
 [#exercice2]
-=== Déployer l'application sur Openshift avec Gitlab CI/CD [*Challenge 2.2*]  __Advanced__
+=== Déployer l'application sur OpenShift avec GitLab CI/CD [*Challenge 2.2*]  __Advanced__
 
 Pour ce challenge, créer le projet **"diod"** sur votre cluster OpenShift.
 
-Avant de pouvoir utiliser Gitlab avec Openshift il faut que vous installiez un "Gitlab runner" sur Openshift.  Le runner est fourni par l'intermédiaire d'un Operator. Il va falloir que vous exploriez votre cluster pour trouver comment l'installer.  
-N'oublier pas de créer un secret pour le runner avant de le déployer.  Pour faire cela vous devrez récupérer le token dans la partie Settings > CI/CD > Runners de votre projet Gitlab.  
-Pour créer le secret, utiliser le manifest suivant (celui de la documentation étant mal formaté) :
+Avant de pouvoir utiliser GitLab avec OpenShift il faut que vous installiez un "GitLab runner" sur OpenShift.  Le runner est fourni par l'intermédiaire d'un Operator. Il va falloir que vous exploriez votre cluster pour trouver comment l'installer.  
+N'oubliez pas de créer un secret pour le runner avant de le déployer.  Pour faire cela vous devrez récupérer le token dans la partie Settings > CI/CD > Runners de votre projet GitLab.  
+Pour créer le secret, utilisez le manifest suivant (celui de la documentation étant mal formaté) :
 ```
 apiVersion: v1
 kind: Secret
@@ -35,9 +35,9 @@ stringData:
 
 Le runner devra être déployé dans le namespace **"diod"**.  
 
-Une fois installé le Gitlab runner vous allez devoir créer un pipeline (gitlab-ci.yml) pour builder l'application et le pousser vers Openshift (qui va s'occuper de containeriser l'application et faire un déploiement 'rolling').  
-Il y a un gitlab-ci.yml déjà present dans le repo pour vous mettre en route, mais n’hésitez pas de le modifier.  Le meilleur gitlab-ci.yml gagnera peut-être quelques points bonus :)  
-Les jobs auront besoin des droits corrects pour pouvoir manipuler votre projet Openshift.  Voici un exemple de comment configurer le RBAC si votre runner tourne dans le même projet (diod) que l'application: 
+Une fois installé le GitLab runner, vous allez devoir créer un pipeline (.gitlab-ci.yml) pour builder l'application et le pousser vers OpenShift (qui va s'occuper de containeriser l'application et faire un déploiement 'rolling').  
+Il y a un .gitlab-ci.yml déjà présent dans le repo pour vous mettre en route, mais n’hésitez pas de le modifier.  Le meilleur .gitlab-ci.yml gagnera peut-être quelques points bonus :)  
+Les jobs auront besoin des droits corrects pour pouvoir manipuler votre projet OpenShift.  Voici un exemple de comment configurer le RBAC si votre runner tourne dans le même projet (diod) que l'application: 
 
 `oc policy add-role-to-user edit system:serviceaccount:diod:default -n diod
 clusterrole.rbac.authorization.k8s.io/edit added: "system:serviceaccount:diod:default"`
@@ -45,7 +45,7 @@ clusterrole.rbac.authorization.k8s.io/edit added: "system:serviceaccount:diod:de
 ==== Preuves à fournir 
 
 * [*Challenge 2.2.1*] Screenshot de l'Operator installé
-* [*Challenge 2.2.2*] Screenshot de Gitlab CI/CD qui montre le Runner qui tourne sur Openshift s'est connecté à Gitlab
-* [*Challenge 2.2.3*] L'URL de votre repo Gitlab qui contient le pipeline (qui a bien évidemment réussi)
-* [*Challenge 2.2.4*] Screenshot des resources k8s générées 
+* [*Challenge 2.2.2*] Screenshot de GitLab CI/CD qui montre le Runner qui tourne sur OpenShift s'est connecté à GitLab
+* [*Challenge 2.2.3*] L'URL de votre repo GitLab qui contient le pipeline (qui a bien évidemment réussi)
+* [*Challenge 2.2.4*] Screenshot des ressources k8s générées 
 
