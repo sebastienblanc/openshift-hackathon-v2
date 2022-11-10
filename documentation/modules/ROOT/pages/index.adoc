@@ -44,4 +44,6 @@ Un tableau dynamique des scores permettra de suivre la progression de chacun tou
 Dès que vous avez complété un challenge, un membre de votre équipe, enverra un message sur le channel `Slack` avec en préfixe, le nom de l'équipe et le numéro du challenge, par exemple *[Equipe1 - Challenge 1.1.1]* suivis du screnshot ou bien de l'URL.
 
 
+
+[.text-center.strong]
 Let the fun begin !
