@@ -1,7 +1,7 @@
 == Helm Et Service
 
 
-Maintenant que nous avons déployé notre application, nous allons la modifier pour que le frontend et le backend soit séparé afin d'avoir une architecture micro-services.  
+Maintenant que nous avons déployé notre application, nous allons la modifier pour que le frontend et le backend soient séparés afin d'avoir une architecture micro-services.  
 Nous allons déployer le backend en utilisant `Helm`.
 
 [#exercice1]
@@ -14,7 +14,7 @@ Tips: `antennas-incident` est un micro service servant une API REST ; cette API 
 
 ==== Preuves à fournir 
 
-* [*Challenge 3.1.1*] Output de la commande `helm2template`
+* [*Challenge 3.1.1*] Output de la commande `template2helm`
 * [*Challenge 3.1.2*] Output de la commande `helm` qui aura déployé le micro-service `antennas-incident` ainsi que le screenshot montrant les ressources déployées dans OpenShift.
 
 
@@ -23,16 +23,16 @@ Tips: `antennas-incident` est un micro service servant une API REST ; cette API 
 Nous allons déployer une nouvelle version de notre front avec l'image `quay.io/rh_ee_slallema/antennas-front-jvm:remote-client`.  
 Cette nouvelle version de l'image basée sur la branche `remote-client` va nous permettre d'utiliser notre nouveau micro-service.  
 Une fois déployée cette nouvelle version du front, nous pourrons modifier sa configuration pour utiliser le micro-service `antennas-incident`.  
-Il vous faudra ajouter 2 variables d'environnements `INCIDENT_URL` et `APIKEY` contenant respectivement l'url du service `antennas-incident` et le secret nous permettant d'accéder à l'API.
+Il vous faudra ajouter 2 variables d'environnement `INCIDENT_URL` et `APIKEY` contenant respectivement l'url du service `antennas-incident` et le secret nous permettant d'accéder à l'API.
 
-**BONUS** : vous pouvez déployer cette nouvelle version comme vous l'entendez mais vous aurez des points bonus si vous créez un chart helm pour déployer le front ;-)
 
 ==== Preuves à fournir 
 
-* [*Challenge 3.2.1*] Screenshot du déploiement de la nouvelle version du front + output de la commande `helm get all <nom_de_la_release_antennas_incident>`
-* [*Challenge 3.2.2*] Screenshot des variables d'environnements de ce nouveau déploiment
-* [*Challenge 3.2.3*] **BONUS** : l'url du repo git ou vous aurez pousser votre chart Helm pour le front
+* [*Challenge 3.2.1*] Manifest yaml montrant la version de l'image utilisée
+* [*Challenge 3.2.2*] Screenshot des variables d'environnement de ce nouveau déploiement
 
 
+**BONUS 3.3** : vous pouvez déployer cette nouvelle version comme vous l'entendez mais vous aurez des points bonus si vous créez un chart helm pour déployer le front ;-)  
 
-
+==== Preuves à fournir 
+* [*Challenge 3.3*] **BONUS** : l'url du repo git ou vous aurez poussé votre chart Helm pour le front
