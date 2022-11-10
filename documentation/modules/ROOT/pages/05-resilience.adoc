@@ -10,7 +10,8 @@ L'application `antennas-incident` a 2 endpoints qui fournissent des health check
 Il va falloir mettre à jour les resources K8s afin d'utiliser ces probes.
 
 
-Ensuite, il faut mettre en place un HPA (Horizontal Pod Autoscaler). Pensez aussi à baisser les ressources disponibles de votre `Deployment` (Limit et Request), mettez des valeurs assez basses pour faire réagir le HPA.
+Ensuite, il faut mettre en place un HPA (Horizontal Pod Autoscaler).  
+Mettez des valeurs assez basses pour faire réagir simplement le HPA.
 
 Voici un exemple d'un HPA :
 
@@ -33,18 +34,24 @@ spec:
   metrics:
     - type: Resource
       resource:
-        name: memory
+        name: cpu
         target:
           type: AverageValue
-          averageValue: 10Mi
+          averageValue: 15m
 
 ----
+
+Voilà un exemple de commande permettant de stresser un peu notre backend afin de faire réagir le HPA:
+`oc run stresspod --restart=Never  --image registry.access.redhat.com/ubi8/ubi-minimal --command -- sh -c "while :; do curl 'http://<antennas-incident service name>/rest/incidents?api_key=<votre secret>' ; done"`
+
+Après quelques secondes, vous devriez avoir plusieurs PODs.
 
 ==== Preuves à fournir
 
 * [*Challenge 5.1.1*] Screenshot ou manifest yaml du déploiement d'antennas-incident montrant les `readinessProbe` et `livenessProbe`
 * [*Challenge 5.1.2*] Screenshot de la console faisant apparaître "Autoscaled to ..." ou manifest yaml du HPA
 
+Pensez à supprimer le POD "stresspod" si besoin (`oc delete po/stresspod`) : après quelques minutes, le HPA devrait réduite le nombre de PODs.
 
 [#exercice2]
 
