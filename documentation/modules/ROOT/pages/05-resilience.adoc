@@ -55,28 +55,34 @@ Pensez à supprimer le POD "stresspod" si besoin (`oc delete po/stresspod`) : ap
 
 [#exercice2]
 
-=== [*Challenge 5.2*] Chaos Kube
+=== [*Challenge 5.2*] Chaos Kube __Advanced__
 
-==== Chaos testing with chaoskube
+==== Chaos testing with chaoskube - Introduction
 
 GitHub repository du projet: https://github.com/linki/chaoskube/
-
-===== Introduction
 
 Le principe est de mettre en place un outil qui va nous permettre de
 simuler des pannes aléatoires sur un projet afin d’améliorer la
 résistance des applications pour surmonter ces pannes en utilisant des
 fonctionnalités de kubernetes.
 
-===== Installation de chaoskube
+==== Installation de chaoskube
 
-====== Préambule
+===== Préambule
 
-Sur OpenShift les SCCs (Security Context Constraints) ajoute un niveau
-de sécurité supplémentaire au cluster kubernetes qui n’existe pas sur la
-plupart des versions kubernetes alternatives. Cependant, ce niveau de
-sécurité plus élevé demande parfois un peu d’adaptation pour pouvoir
-deployer des applications qui n’ont pas été testées sur OpenShift. À
+OpenShift impose un certain nombre de restrictions liées à la sécurité 
+qui n'exitent pas sur d'autres environements kubernetes.
+
+Par example, sur OpenShift les SCCs (Security Context Constraints) ajoute un niveau
+de sécurité supplémentaire au cluster kubernetes en restreignant les droits alloués
+aux comptes de services en charge de l'execution des containers.
+
+OpenShift fait également attention à assigner des user ids uniques par pod au sein
+d'un même projet.
+
+Cependant, ce niveau de sécurité plus élevé demande parfois de réaliser quelques
+modifications et un peu d’adaptation pour pouvoir
+deployer des applications qui n’ont pas encore été testées sur OpenShift. À
 noter que ça n’est pas réciproque, une application packagée et testée
 pour OpenShift se déploiera généralement sans modification sur une
 autre distribution kubernetes.
@@ -85,9 +91,26 @@ autre distribution kubernetes.
 ----
 oc new-project chaoskube
 oc adm policy add-scc-to-user runasanyuid -z chaoskube
+cat <<-EOF > values-override.yaml
+podSecurityContext:
+   runAsUser:
+EOF
 ----
 
-====== Déploiement Helm
+[NOTE]
+====
+Dans le cas présent, on remplace les valeurs de configurations par défaut dans le template helm en créant un fichier values-override.yaml.
+
+Vous pouvez également attribuer une SCC au compte de service chaoskube (anyuid ou runasanyuid en fonction de la version d'OpenShift) pour palier à ce problème.
+[source,sh]
+----
+oc adm policy add-scc-to-user anyuid -z chaoskube
+----
+
+Ou bien, créer un fork du repository git chaoskube, faire la modification dans votre repository et soumettre une pull request aux développeurs de chaoskube.
+====
+
+===== Déploiement Helm
 
 Ensuite, procéder à l’installation comme spécifié dans la documentation
 en omettant de créer le namespace:
@@ -95,7 +118,7 @@ en omettant de créer le namespace:
 [source,sh]
 ----
 helm repo add chaoskube https://linki.github.io/chaoskube/
-helm install chaoskube chaoskube/chaoskube --atomic --namespace=chaoskube
+helm install chaoskube chaoskube/chaoskube --atomic --namespace=chaoskube -f ./values-override.yaml
 ----
 
 Vérifier le bon déploiement:
@@ -110,7 +133,7 @@ $ oc -n chaoskube logs -f $(oc -n chaoskube get pods -l app.kubernetes.io/instan
 ...
 ----
 
-====== Cleanup
+===== Cleanup
 
 Chaoskube devrait être déployé et fonctionnel. Cependant, nous
 souhaitons le paramétrer pour ne cibler que des applications spécifiques
@@ -138,14 +161,16 @@ helm uninstall chaoskube
 ----
 
 _Note_: un chart helm peut être configuré en utilisant un fichier
-values.yaml qui remplace les paramètres par défaut.
+values.yaml ou values-override.yaml (voir le déploiement initial) 
+qui remplace les paramètres définis par défaut.
 
-==== [*Challenge 5.2.1*] Chaos Kube __Beginner__
+==== [*Exercice*]
 
 En partant d’un déploiement simple, utiliser chaoskube pour tester la
 résilience de cette application:
 * cibler exclusivement le namespace de l’application
 * tuer des ressources toutes les 15 secondes
+* s'assurer que les pods sont bien détruits dans le namespace ciblé
 
 [source,yaml]
 ----
@@ -188,17 +213,16 @@ status: {}
 
 TIP: Vous pouvez modifier les paramètres de ce descripteur de déploiement pour augmenter la disponibilité de l’application
 
-===== Preuves à fournir
+==== Preuves à fournir
 
-* [*Challenge 5.2.1.1*] logs chaoskube prouvant la destruction de pods dans l’intervalle de temps défini
-* [*Challenge 5.2.1.2*] Output des pods applicatifs incluant leur statut et leur âge démontrant la disponibilité de l’application malgré les destructions aléatoires
+* [*Challenge 5.2.1*] fichier values-override.yaml + extrait des logs chaoskube prouvant la destruction de pods dans l’intervalle de temps défini
+* [*Challenge 5.2.2*] Output des pods applicatifs incluant leur statut et leur âge démontrant la disponibilité de l’application malgré les destructions aléatoires
 
-==== [*Challenge 5.2.2*] Chaos Kube __Advanced__
+=== BONUS challenge - Antenna Front chaos
 
 En utilisant le projet antenna-front, configurez chaoskube pour y
 appliquer le chaos testing.
 
-===== Preuves à fournir
+==== Preuves à fournir
 
-* [*Challenge 5.2.2.1*] logs chaoskube prouvant la destruction de pods dans l’intervalle de temps défini
-* [*Challenge 5.2.2.2*] Test de l’API (http) pendant 2 minutes affichant son taux de disponibilité (script utilisé + résultats)
+* [*Challenge 5.2.3*] logs chaoskube prouvant la destruction de pods dans l’intervalle de temps défini plus évidences du test de l’API (http) pendant 2 minutes affichant son taux de disponibilité (script utilisé + résultats)
