@@ -11,15 +11,17 @@ Assurez-vous aussi de bien rejoindre le channel Slack #scoreboard car c'est par 
 
 
 == Mécanique du jeu
-Le hackathon DIOD comprend 6 challenges. A chaque challenge, vous apprendrez de nouvelles notions autour de Kubernetes et OpenShift au travers d'exercices et tâches à réaliser.  
+Le hackathon DIOD comprend 6 challenges.  
+A chaque challenge, vous apprendrez de nouvelles notions autour de Kubernetes et OpenShift au travers d'exercices et tâches à réaliser.  
 
 Pour chaque challenge, il y aura des tâches de niveau Beginner et de niveau Advanced.  
 Chaque tâche vous permet de recevoir des points si vous apportez les preuves des réalisations demandées.  
 Une preuve peut se matérialiser sous forme de :
-* capture d’écran à nous transmettre,
-* partie d’application à réaliser ou déployer,
-* résultat de commande à nous transmettre,
-* etc.
+
+* capture d’écran à nous transmettre
+* partie d’application à réaliser ou déployer
+* résultat de commande à nous transmettre
+* etc
 
 
 L’ensemble des tâches Beginner et Advanced doit être réalisé pour remporter le maximum de points ! Ainsi les advanced devront aider les beginners, mais ceux-ci devront aussi faire preuve
@@ -27,6 +29,7 @@ d’autonomie pour laisser le temps aux rockstars de relever les défis plus com
 
 Les points sont attribués aux équipes et non individuellement. Chaque challenge vous permettra d’emporter 10 points (5 en Beginner et 5 en Advanced).  
 De points de Bonus peuvent également être gagnés :
+
 * Bonus temps (+3 pour le 1er à apporter une preuve, +2 pour le 2nd, +1 pour le 3eme)
 * Bonus challenges supplémentaires
 * Bonus créativité
