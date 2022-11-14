@@ -58,7 +58,7 @@ clusterrole.rbac.authorization.k8s.io/edit added: "system:serviceaccount:diod:de
 
 [#bonus]
 === Bonus
-Si vous avez encore du temps, n'hesitez pas d'ameliorer le pipeline avec des tests/scan/optimizations/etc. Le meilleur .gitlab-ci.yml gagnera quelques points bonus :)  
+Si vous avez encore du temps, n'hésitez pas d'améliorer le pipeline avec des tests/scan/optimizations/etc. Le meilleur .gitlab-ci.yml gagnera quelques points bonus :)  
 
 ==== Preuves à fournir 
 * [*Challenge 2.3.0*] Encore une fois l'URL de votre repo GitLab qui contient le pipeline et une petite explication de ce que vous avez ajouté 
