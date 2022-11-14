@@ -23,7 +23,9 @@ Tips: `antennas-incident` est un micro service servant une API REST ; cette API 
 Nous allons déployer une nouvelle version de notre front avec l'image `quay.io/rh_ee_slallema/antennas-front-jvm:remote-client`.  
 Cette nouvelle version de l'image basée sur la branche `remote-client` va nous permettre d'utiliser notre nouveau micro-service.  
 Une fois déployée cette nouvelle version du front, nous pourrons modifier sa configuration pour utiliser le micro-service `antennas-incident`.  
-Il vous faudra ajouter 2 variables d'environnement `INCIDENT_URL` et `APIKEY` contenant respectivement l'url du service `antennas-incident` et le secret nous permettant d'accéder à l'API.
+Il vous faudra ajouter 2 variables d'environnement `INCIDENT_URL` et `APIKEY` contenant respectivement l'url du service `antennas-incident` et le secret nous permettant d'accéder à l'API.  
+
+Si tout fonctionne correctement, vous devriez retrouver les 2 incidents dans l'application ... Si ça ne fonctionne pas, vous aurez un incident "Fallback".  
 
 
 ==== Preuves à fournir 
