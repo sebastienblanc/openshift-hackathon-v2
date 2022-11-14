@@ -21,6 +21,68 @@ Une fois cette _Merge Request_ fusionnée dans la branche principale, *OpenShift
 
 ===  Préparatifs
 
+Forkez le dépôt suivant : https://gitlab.com/nmasse-itix/antennas-gitops[antennas-gitops]
+
+* Allez sur le dépôt https://gitlab.com/nmasse-itix/antennas-gitops[antennas-gitops]
+* Cliquez sur *Créer une divergence*
+
+Créez trois projets dans OpenShift, correspondant aux environnements de développement, test et production.
+
+[source,sh]
+----
+oc new-project antennas-dev
+oc new-project antennas-test
+oc new-project antennas-prod
+----
+
+===  [*Challenge 6.1*]  __Beginner__
+
+Dans ce défi, votre tâche est de réaliser la toute fin du processus GitOps pour que lors d'un _Commit_ (dépôt *antennas-gitops*), les changements sont appliqués à l'environnement de production (projet *antennas-prod*).
+
+Il vous faudra :
+
+* Installer l'opérateur *OpenShift GitOps*
+* Ajouter un _Webhook_ au dépôt *antennas-gitops* pour qu'un commit/merge déclenche un déploiement.
+* Créer une *Application* ArgoCD
+
+Ah, et n'oubliez pas de configurer votre application ArgoCD pour que les manifestes déployés utilisent votre dépôt quay.io !
+
+.Astuces en vrac
+[TIP]
+===============================
+* La commande suivante vous retournera l'URL du webhook ArgoCD
+
+----
+oc get route -n openshift-gitops openshift-gitops-server -o jsonpath='https://{.spec.host}/api/webhook'
+----
+
+* Pour simuler la _Merge Request_ qui sera créée par le pipeline CI, poussez un _commit_ dans le dépot *antennas-gitops* altérant le fichier *values-prod.yaml*:
+
+----
+antennas-front:
+  image:
+    repository: "quay.io/<your_username_here>/antennas-front"
+    tag: test1
+----
+
+Vous incrémenterez `test1` à chaque test (pensez à pousser le tag correspondant) !
+
+===============================
+
+Pour vous aider, vous pouvez vous appuyer sur la documentation suivante.
+
+* https://docs.openshift.com/container-platform/4.11/cicd/gitops/installing-openshift-gitops.html[Installing OpenShift GitOps]
+* https://argo-cd.readthedocs.io/en/stable/user-guide/helm/[ArgoCD - Helm]
+
+==== Preuves à fournir 
+
+* Capture d'écran du Webhook configuré avec les évènements récents en statut *200*
+* Capture d'écran de la console ArgoCD montrant votre application synchronisée et fonctionnelle
+* Capture d'écran du champ *image* du déploiement *antennas-front* dans la console ArgoCD
+* Votre application ArgoCD au format YAML
+
+===  Préparatifs pour le challenge 6.2
+
 Faites une copie de votre dépôt Git *antennas-front*
 
 * Allez sur la page d'accueil de https://gitlab.com[GitLab]
@@ -33,22 +95,10 @@ Faites une copie de votre dépôt Git *antennas-front*
 * Changez le chemin en *antennas-front-backup*
 * Cliquez sur *Changer le chemin*
 
-Forkez les dépôts suivants : https://gitlab.com/nmasse-itix/antennas-gitops[antennas-gitops] et https://gitlab.com/nmasse-itix/antennas-front[antennas-front]
-
-* Allez sur le dépôt https://gitlab.com/nmasse-itix/antennas-gitops[antennas-gitops]
-* Cliquez sur *Créer une divergence*
+Forkez le dépôt suivant : https://gitlab.com/nmasse-itix/antennas-front[antennas-front]
 
 * Allez sur le dépôt https://gitlab.com/nmasse-itix/antennas-front[antennas-front]
 * Cliquez sur *Créer une divergence*
-
-Créez trois projets dans OpenShift, correspondant aux environnements de développement, test et production.
-
-[source,sh]
-----
-oc new-project antennas-dev
-oc new-project antennas-test
-oc new-project antennas-prod
-----
 
 IMPORTANT: L'opérateur GitLab Runner a un bug (corrigé chez GitLab mais pas encore livré) qui va nous gêner dans ce défi. Pour cela, vous devrez désinstaller l'opérateur GitLab Runner que vous avez installé dans le défi numéro 2 et installer une version béta.
 
@@ -147,45 +197,8 @@ variables:
 À cette étape, le pipeline CI/CD doit se terminer sans erreur.
 Si ce n'est pas le cas, revérifiez les étapes ci-dessus et appelez un facilitateur !
 
-NOTE: Le pipeline déploie l'application dans l'environnement de test mais pas encore dans l'environnement de production car c'est tout l'objet du défi suivant !
-      En attendant, vous pouvez déjà observer les _Merge Requests_ arriver dans le dépôt *antennas-gitops*.
-
-===  [*Challenge 6.1*]  __Beginner__
-
-Dans ce défi, votre tâche est de compléter le processus GitOps pour que lorsque la _Merge Request_ (dépôt *antennas-gitops*) créée par pipeline GitLab CI est fusionnée, les changements sont appliqués à l'environnement de production (projet *antennas-prod*).
-
-Il vous faudra :
-
-* Installer l'opérateur *OpenShift GitOps*
-* Ajouter un _Webhook_ au dépôt *antennas-gitops* pour qu'un commit/merge déclenche un déploiement.
-* Créer une *Application* ArgoCD
-
-Ah, et n'oubliez pas de configurer votre application ArgoCD pour que les manifestes déployés utilisent votre dépôt quay.io !
-
-.Astuces en vrac
-[TIP]
-===============================
-* La commande suivante vous retournera l'URL du webhook ArgoCD
-
-----
-oc get route -n openshift-gitops openshift-gitops-server -o jsonpath='https://{.spec.host}/api/webhook'
-----
-
-* Le pipeline GitLab CI met 5 minutes à s'exécuter. Vous pouvez le court-circuiter durant la phase de mise au point en éditant directement les fichiers dans le dépôt *antennas-gitops*.
-
-===============================
-
-Pour vous aider, vous pouvez vous appuyer sur la documentation suivante.
-
-* https://docs.openshift.com/container-platform/4.11/cicd/gitops/installing-openshift-gitops.html[Installing OpenShift GitOps]
-* https://argo-cd.readthedocs.io/en/stable/user-guide/helm/[ArgoCD - Helm]
-
-==== Preuves à fournir 
-
-* Capture d'écran du Webhook configuré avec les évènements récents en statut *200*
-* Capture d'écran de la console ArgoCD montrant votre application synchronisée et fonctionnelle
-* Capture d'écran du champ *image* du déploiement *antennas-front* dans la console ArgoCD
-* Votre application ArgoCD au format YAML
+NOTE: Le pipeline déploie l'application dans l'environnement de test et si vous avez terminé le défi précédent, il déploie aussi dans l'environnement de production !
+      Vous pouvez observer les _Commits_ arriver dans le dépôt *antennas-gitops*.
 
 === [*Challenge 6.2*] __Advanced__
 
