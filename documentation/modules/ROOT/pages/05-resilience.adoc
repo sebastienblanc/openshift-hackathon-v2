@@ -54,6 +54,10 @@ Après quelques secondes, vous devriez avoir plusieurs PODs.
 Pensez à supprimer le POD "stresspod" si besoin (`oc delete po/stresspod`) : après quelques minutes, le HPA devrait réduite le nombre de PODs.
 
 
+**Notes** : nous avons utilisé ici la fonctionnalité "HorizontalPodAutoscaler" qui permet d'ajuster notre nombre de PODs dynamiquement.  
+Il existe également le "VerticalPodAutoscaler" (https://docs.openshift.com/container-platform/4.8/nodes/pods/nodes-pods-vertical-autoscaler.html) qui permet de modifier dynamiquement les ressources affectées à des PODs.  
+
+
 
 
 [#exercice2]
