@@ -37,7 +37,7 @@ spec:
         name: cpu
         target:
           type: AverageValue
-          averageValue: 15m
+          averageValue: 5m
 
 ----
 
@@ -52,6 +52,9 @@ Après quelques secondes, vous devriez avoir plusieurs PODs.
 * [*Challenge 5.1.2*] Screenshot de la console faisant apparaître "Autoscaled to ..." ou manifest yaml du HPA
 
 Pensez à supprimer le POD "stresspod" si besoin (`oc delete po/stresspod`) : après quelques minutes, le HPA devrait réduite le nombre de PODs.
+
+
+
 
 [#exercice2]
 
