@@ -20,7 +20,7 @@ Voici un exemple d'un HPA :
 ----
 
 kind: HorizontalPodAutoscaler
-apiVersion: autoscaling/v2
+apiVersion: autoscaling/v2beta2
 metadata:
   name: example
   namespace: myspace
