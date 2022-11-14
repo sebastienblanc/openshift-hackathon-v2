@@ -7,8 +7,8 @@ Une fois déployé, on aura besoin d'un aperçu de ce qui se passe avec notre ap
 Il est très important de pouvoir observer ce qui se passe dans le cluster. Que ce soit pour voir si une application utilise trop de ressources, ou être alerté en cas de charge inhabituelle, etc.  Vous allez découvrir que OpenShift a par défaut déjà pas mal de façons d'observer le cluster/les workloads/les projets etc.  Pour ce challenge vous allez devoir trouver des dashboards avec les métriques suivantes:
 
     1. *Memory Usage* du déploiement "antennas-front" [dans la vue Topology]
-    2. *CPU Usage* du déploiement "antennas-incident" dans les dernières 5 minutes  [dans la vue Developer > Observe]
-    3. *CPU Quota* de tous les projets du cluster [dans la vue Administrator > Observe ]
+    2. *CPU Usage* du déploiement "antennas-incident" dans les dernières 5 minutes  [dans la vue Developer > Monitoring (ou Observe selon la version du cluster)]
+    3. *CPU Quota* de tous les projets du cluster [dans la vue Administrator > Monitoring (ou Observe selon la version di cluster) ]
 
 
 
@@ -24,9 +24,9 @@ On va jouer un peu avec les "requests" et "limits" de notre déploiement antenna
     1. Rajoutez des limits et request au déploiement 'antennas-front'. Bien sûr en modifiant votre repo et en redéployant avec GitLab CI/CD 
 
         * CPU Requests: 50 millicores
-        * CPU Limits: 100 millicores
-        * Memory Requests: 50 Mi
-        * Memory Limits: 100 Mi
+        * CPU Limits: 60 millicores
+        * Memory Requests: 40 Mi
+        * Memory Limits: 60 Mi
     
     2. Observer le déploiement.  Cherchez pourquoi l'application "tombe en panne".  À vous de nous le dire, et pourquoi :)  Et de nous expliquer la différence entre "requests" et "limits"
 
