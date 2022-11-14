@@ -8,7 +8,7 @@ Entre temps, l'application que vous avez manipulée a un peu évolué :
 * *antennas-front* fait maintenant des appels API (REST) à un composant *antennas-incident*.
 * *antennas-incident* s'appuie sur une base de données MariaDB pour stocker ses données.
 
-Un troisième entrepôt Git fait son apparition, *antennas-gitops*, pour stocker les manifests Kubernetes à déployer.
+Un troisième dépôt Git fait son apparition, *antennas-gitops*, pour stocker les manifests Kubernetes à déployer.
 
 .Processus GitOps
 image::gitops.png[]
@@ -21,24 +21,9 @@ Une fois cette _Merge Request_ fusionnée dans la branche principale, *OpenShift
 
 ===  Préparatifs
 
-Faites une copie de votre entrepôt Git *antennas-front*
+Forkez le dépôt suivant : https://gitlab.com/nmasse-itix/antennas-gitops[antennas-gitops]
 
-* Allez sur la page d'accueil de https://gitlab.com[GitLab]
-* Cliquez sur l'entrepôt *antennas-front*
-* Naviguez dans *Paramètres* > *Général*
-* Changez le nom du projet en *antennas-front-backup*
-* Cliquez sur *Enregistrez les modifications*
-* Dépliez la section *Advanced*
-* Descendez jusqu'à la section *Changer le chemin*
-* Changez le chemin en *antennas-front-backup*
-* Cliquez sur *Changer le chemin*
-
-Divergez les entrepôts suivants : https://gitlab.com/nmasse-itix/antennas-gitops[antennas-gitops] et https://gitlab.com/nmasse-itix/antennas-front[antennas-front]
-
-* Allez sur l'entrepôt https://gitlab.com/nmasse-itix/antennas-gitops[antennas-gitops]
-* Cliquez sur *Créer une divergence*
-
-* Allez sur l'entrepôt https://gitlab.com/nmasse-itix/antennas-front[antennas-front]
+* Allez sur le dépôt https://gitlab.com/nmasse-itix/antennas-gitops[antennas-gitops]
 * Cliquez sur *Créer une divergence*
 
 Créez trois projets dans OpenShift, correspondant aux environnements de développement, test et production.
@@ -49,6 +34,71 @@ oc new-project antennas-dev
 oc new-project antennas-test
 oc new-project antennas-prod
 ----
+
+===  [*Challenge 6.1*]  __Beginner__
+
+Dans ce défi, votre tâche est de réaliser la toute fin du processus GitOps pour que lors d'un _Commit_ (dépôt *antennas-gitops*), les changements sont appliqués à l'environnement de production (projet *antennas-prod*).
+
+Il vous faudra :
+
+* Installer l'opérateur *OpenShift GitOps*
+* Ajouter un _Webhook_ au dépôt *antennas-gitops* pour qu'un commit/merge déclenche un déploiement.
+* Créer une *Application* ArgoCD
+
+Ah, et n'oubliez pas de configurer votre application ArgoCD pour que les manifestes déployés utilisent votre dépôt quay.io !
+
+.Astuces en vrac
+[TIP]
+===============================
+* La commande suivante vous retournera l'URL du webhook ArgoCD
+
+----
+oc get route -n openshift-gitops openshift-gitops-server -o jsonpath='https://{.spec.host}/api/webhook'
+----
+
+* Pour simuler la _Merge Request_ qui sera créée par le pipeline CI, poussez un _commit_ dans le dépot *antennas-gitops* altérant le fichier *values-prod.yaml*:
+
+----
+antennas-front:
+  image:
+    repository: "quay.io/<your_username_here>/antennas-front"
+    tag: test1
+----
+
+Vous incrémenterez `test1` à chaque test (pensez à pousser le tag correspondant) !
+
+===============================
+
+Pour vous aider, vous pouvez vous appuyer sur la documentation suivante.
+
+* https://docs.openshift.com/container-platform/4.11/cicd/gitops/installing-openshift-gitops.html[Installing OpenShift GitOps]
+* https://argo-cd.readthedocs.io/en/stable/user-guide/helm/[ArgoCD - Helm]
+
+==== Preuves à fournir 
+
+* Capture d'écran du Webhook configuré avec les évènements récents en statut *200*
+* Capture d'écran de la console ArgoCD montrant votre application synchronisée et fonctionnelle
+* Capture d'écran du champ *image* du déploiement *antennas-front* dans la console ArgoCD
+* Votre application ArgoCD au format YAML
+
+===  Préparatifs pour le challenge 6.2
+
+Faites une copie de votre dépôt Git *antennas-front*
+
+* Allez sur la page d'accueil de https://gitlab.com[GitLab]
+* Cliquez sur le dépôt *antennas-front*
+* Naviguez dans *Paramètres* > *Général*
+* Changez le nom du projet en *antennas-front-backup*
+* Cliquez sur *Enregistrez les modifications*
+* Dépliez la section *Advanced*
+* Descendez jusqu'à la section *Changer le chemin*
+* Changez le chemin en *antennas-front-backup*
+* Cliquez sur *Changer le chemin*
+
+Forkez le dépôt suivant : https://gitlab.com/nmasse-itix/antennas-front[antennas-front]
+
+* Allez sur le dépôt https://gitlab.com/nmasse-itix/antennas-front[antennas-front]
+* Cliquez sur *Créer une divergence*
 
 IMPORTANT: L'opérateur GitLab Runner a un bug (corrigé chez GitLab mais pas encore livré) qui va nous gêner dans ce défi. Pour cela, vous devrez désinstaller l'opérateur GitLab Runner que vous avez installé dans le défi numéro 2 et installer une version béta.
 
@@ -102,7 +152,7 @@ oc adm policy add-role-to-user admin system:serviceaccount:antennas-dev:default 
 oc adm policy add-scc-to-user anyuid -z default -n antennas-dev
 ----
 
-Maintenant, nous allons configurer notre pipeline CI/CD pour qu'il puisse écrire dans l'entrepôt *antennas-gitops* et pousser les images de conteneur dans quay.io.
+Maintenant, nous allons configurer notre pipeline CI/CD pour qu'il puisse écrire dans le dépôt *antennas-gitops* et pousser les images de conteneur dans quay.io.
 
 * Allez sur votre https://gitlab.com/-/profile/personal_access_tokens[profil GitLab]
 * Créez un _Personal Access Token_ avec la portée *api*, *read_api*, *read_user*, *read_repository* et *write_repository*.
@@ -116,7 +166,7 @@ TIP: notez soigneusement le jeton généré !
 
 TIP: notez soigneusement le mot de passe généré ainsi que votre identifiant (champ **Username** sur la même page) !
 
-* Allez sur l'entrepôt *antennas-front* dans https://gitlab.com[GitLab]
+* Allez sur le dépôt *antennas-front* dans https://gitlab.com[GitLab]
 * Ouvrez *Paramètres* > *Intégration et livraison continues*
 * Dépliez la section *Variables*
 * Créez trois variables :
@@ -126,7 +176,7 @@ TIP: notez soigneusement le mot de passe généré ainsi que votre identifiant (
 
 IMPORTANT: Les variables *GITLAB_TOKEN* et *QUAY_PASSWORD* doivent être masquées (_Masked_) !
 
-Éditez les fichier *.gitlab-ci.yaml* de l'entrepôt *antennas-front* et ajustez les lignes suivantes à votre configuration.
+Éditez les fichier *.gitlab-ci.yaml* du dépôt *antennas-front* et ajustez les lignes suivantes à votre configuration.
 
 [source,yaml]
 ----
@@ -140,56 +190,19 @@ variables:
   BOT_EMAIL: nicolas.masse@itix.fr
 ----
 
-* *ANTENNAS_FRONT_IMAGE* est l'entrepôt quay.io que vous avez créé lors du premier défi
-* *ANTENNAS_GITOPS_REPOSITORY* est l'entrepôt *antennas-gitops* que vous avez copié précédemment
+* *ANTENNAS_FRONT_IMAGE* est le dépôt quay.io que vous avez créé lors du premier défi
+* *ANTENNAS_GITOPS_REPOSITORY* est le dépôt *antennas-gitops* que vous avez copié précédemment
 * *BOT_EMAIL* est l'adresse email rattachée à votre compte GitLab
 
 À cette étape, le pipeline CI/CD doit se terminer sans erreur.
 Si ce n'est pas le cas, revérifiez les étapes ci-dessus et appelez un facilitateur !
 
-NOTE: Le pipeline déploie l'application dans l'environnement de test mais pas encore dans l'environnement de production car c'est tout l'objet du défi suivant !
-      En attendant, vous pouvez déjà observer les _Merge Requests_ arriver dans l'entrepôt *antennas-gitops*.
-
-===  [*Challenge 6.1*]  __Beginner__
-
-Dans ce défi, votre tâche est de compléter le processus GitOps pour que lorsque la _Merge Request_ (entrepôt *antennas-gitops*) créée par pipeline GitLab CI est fusionnée, les changements sont appliqués à l'environnement de production (projet *antennas-prod*).
-
-Il vous faudra :
-
-* Installer l'opérateur *OpenShift GitOps*
-* Ajouter un _Webhook_ à l'entrepôt *antennas-gitops* pour qu'un commit/merge déclenche un déploiement.
-* Créer une *Application* ArgoCD
-
-Ah, et n'oubliez pas de configurer votre application ArgoCD pour que les manifestes déployés utilisent votre entrepôt quay.io !
-
-.Astuces en vrac
-[TIP]
-===============================
-* La commande suivante vous retournera l'URL du webhook ArgoCD
-
-----
-oc get route -n openshift-gitops openshift-gitops-server -o jsonpath='https://{.spec.host}/api/webhook'
-----
-
-* Le pipeline GitLab CI met 5 minutes à s'exécuter. Vous pouvez le court-circuiter durant la phase de mise au point en éditant directement les fichiers dans l'entrepôt *antennas-gitops*.
-
-===============================
-
-Pour vous aider, vous pouvez vous appuyer sur la documentation suivante.
-
-* https://docs.openshift.com/container-platform/4.11/cicd/gitops/installing-openshift-gitops.html[Installing OpenShift GitOps]
-* https://argo-cd.readthedocs.io/en/stable/user-guide/helm/[ArgoCD - Helm]
-
-==== Preuves à fournir 
-
-* Capture d'écran du Webhook configuré avec les évènements récents en statut *200*
-* Capture d'écran de la console ArgoCD montrant votre application synchronisée et fonctionnelle
-* Capture d'écran du champ *image* du déploiement *antennas-front* dans la console ArgoCD
-* Votre application ArgoCD au format YAML
+NOTE: Le pipeline déploie l'application dans l'environnement de test et si vous avez terminé le défi précédent, il déploie aussi dans l'environnement de production !
+      Vous pouvez observer les _Commits_ arriver dans le dépôt *antennas-gitops*.
 
 === [*Challenge 6.2*] __Advanced__
 
-Dans ce défi, vous devrez améliorer le contenu de l'entrepôt **antennas-gitops** pour réaliser une livraison applicative au format _Blue/Green_.
+Dans ce défi, vous devrez améliorer le contenu du dépôt **antennas-gitops** pour réaliser une livraison applicative au format _Blue/Green_.
 
 Le principe est le suivant :
 
@@ -199,23 +212,23 @@ Le principe est le suivant :
 * Si les tests de mise en production sont satisfaisants, on bascule le trafic vers l'instance *verte*.
 * À la livraison suivante, c'est l'inverse : c'est l'instance *bleue* qui sera mise à jour. Et ainsi de suite... 
 
-Dans la branche *gitops* de l'entrepôt *antennas-front* vous avez un pipeline GitLab CI adapté à ce type de livraison.
+Dans la branche *blue-green* du dépôt *antennas-front* vous avez un pipeline GitLab CI adapté à ce type de livraison.
 Observez bien son fonctionnement ainsi que les différences avec celui de la branche *main*.
 
-Dans la branche *gitops* de l'entrepôt *antennas-gitops* vous avez un _Chart Helm_ mis à jour avec deux instances de l'application, une verte et une bleue.
+Dans la branche *blue-green* du dépôt *antennas-gitops* vous avez un _Chart Helm_ mis à jour avec deux instances de l'application, une verte et une bleue.
 
 Votre tâche sera de trouver un moyen de faire la bascule *vert* / *bleu*.
 
 .Astuces en vrac
 [TIP]
 ===============================
-* Le pipeline GitLab CI met à jour le fichier *values-prod.yaml* dans l'entrepôt *antennas-gitops* avec la cible active (deux valeurs possibles: *blue* et *green*). À vous d'utiliser cette valeur dans le _Chart Helm_ pour créer l'objet Kubernetes qui vous permettra de faire la bascule. 
+* Le pipeline GitLab CI met à jour le fichier *values-prod.yaml* dans le dépôt *antennas-gitops* avec la cible active (deux valeurs possibles: *blue* et *green*). À vous d'utiliser cette valeur dans le _Chart Helm_ pour créer l'objet Kubernetes qui vous permettra de faire la bascule. 
 
-* Le pipeline GitLab CI met 5 minutes à s'exécuter. Vous pouvez le court-circuiter durant la phase de mise au point en éditant directement les fichiers dans l'entrepôt *antennas-gitops*.
+* Le pipeline GitLab CI met 5 minutes à s'exécuter. Vous pouvez le court-circuiter durant la phase de mise au point en éditant directement les fichiers dans le dépôt *antennas-gitops*.
 
 * N'oubliez pas de mettre à jour votre *Application* ArgoCD avec la bonne branche Git (*blue-green*) et les bons paramètres _Helm_ !
 
-* Pensez à passer la branche *blue-green* de votre entrepôt *antennas-front* en _Protected_ pour qu'elle puisse accéder aux variables CI/CD !
+* Pensez à passer la branche *blue-green* de votre dépôt *antennas-front* en _Protected_ pour qu'elle puisse accéder aux variables CI/CD !
 
 ===============================
 
