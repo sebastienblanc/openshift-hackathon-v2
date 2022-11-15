@@ -1,6 +1,7 @@
 * xref:00-prerequis.adoc[0. Pré-requis]
 * xref:01-containers.adoc[1. Challenge 1 - Containers]
 * xref:02-openshift.adoc[2. Challenge 2 - OpenShift & CI/CD]
+* xref:03-helm_services.adoc[3. Challenge 3 - Helm et Services]
 
 
 
